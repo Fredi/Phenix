@@ -14,10 +14,16 @@ class Phoenix
 
 	private $request;
 	private $response;
+	private $session;
 
 	private $router;
 
 	protected $env;
+
+	public function __construct()
+	{
+		$this->session = new Session();
+	}
 
 	public static function getInstance()
 	{
@@ -51,6 +57,21 @@ class Phoenix
 	public function run()
 	{
 		$this->response->write("Welcome to Phoenix");
+	}
+
+	public static function request()
+	{
+		return self::$instance->request;
+	}
+
+	public static function response()
+	{
+		return self::$instance->response;
+	}
+
+	public static function session()
+	{
+		return self::$instance->session;
 	}
 
 	public static function router()
