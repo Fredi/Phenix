@@ -15,6 +15,8 @@ class Phoenix
 	private $request;
 	private $response;
 
+	protected $env;
+
 	public static function getInstance()
 	{
 		if (!isset($instance))
