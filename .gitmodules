@@ -1,0 +1,3 @@
+[submodule "vendor/php-rack"]
+	path = vendor/php-rack
+	url = git://github.com/fredi/php-rack.git
