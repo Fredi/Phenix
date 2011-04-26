@@ -10,7 +10,7 @@ define("PHOENIX_PATH", ROOT.DS."lib".DS."Phoenix");
  */
 class Phoenix
 {
-	static private $instance;
+	private static $instance;
 
 	private $request;
 	private $response;
@@ -27,7 +27,7 @@ class Phoenix
 
 	public static function getInstance()
 	{
-		if (!isset($instance))
+		if (!isset(self::$instance))
 			self::$instance = new self();
 
 		return self::$instance;
