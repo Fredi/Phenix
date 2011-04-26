@@ -59,9 +59,27 @@ class Phoenix
 		return array($code, $headers, $body);
 	}
 
+	public function setup()
+	{
+		// Load ApplicationController if it exists
+		$app_controller = ROOT.DS."app".DS."controllers".DS."application_controller.php";
+		if (file_exists($app_controller))
+			require_once $app_controller;
+
+		// Load application routes
+		$routes = ROOT.DS."config".DS."routes.php";
+		if (file_exists($routes))
+			require_once $routes;
+	}
+
 	public function run()
 	{
-		$this->response->write("Welcome to Phoenix");
+		$this->setup();
+
+		if ($this->router->count())
+			$this->request->handleRequest();
+		else
+			$this->response->write("Welcome to Phoenix!");
 	}
 
 	public function __get($name)
