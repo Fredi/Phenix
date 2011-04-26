@@ -3,8 +3,6 @@ class Router
 {
 	private $routes;
 
-	private $count = 0;
-
 	public function __construct()
 	{
 		$this->routes = array(
@@ -33,14 +31,8 @@ class Router
         $route = new Route($pattern, $callable);
         $route->setRouter($this);
         $this->routes[$method][] = $route;
-		$this->count++;
         return $route;
     }
-
-	public function count()
-	{
-		return $this->count;
-	}
 }
 
 class RouteNotMatchedException extends Exception {}
