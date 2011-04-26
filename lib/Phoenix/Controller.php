@@ -36,7 +36,7 @@ class Controller
 		}
 
 		if ($value === null || empty($value))
-			$value = $this->renderAction($params);
+			$value = $this->renderAction();
 
 		if ($this->render_layout)
 		{
