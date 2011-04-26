@@ -103,6 +103,48 @@ One nice thing you can do with RESTful Routes is to use just one URL but execute
 
 That's very nice!
 
+### Making a "Hello World" Rack Application
+
+Maybe you are asking yourself "what the hell is Rack?". It's basically an interface that sits between the HTTP request and our Application. [Check this out](https://github.com/tedkulp/php-rack#readme) for more information.
+
+So, we will make a HelloWorld class that will return 'Hello World!' if we access the '/hello_world' URL.
+
+1. First create a file called 'helloworld.php' in the '/lib' directory with this code:
+
+        <?php
+        class HelloWorld
+        {
+            function __construct(&$app)
+            {
+                $this->app =& $app;
+            }
+            function call(&$env)
+            {
+                // If we access the '/hello_world' URL it just returns the body 'Hello World!'
+                if ($env['PATH_INFO'] == '/hello_world')
+                    return array(200, array(), array('Hello World!'));
+                // Otherwise we continue by calling the next application in the stack
+                return $this->app->call($env);
+            }
+        }
+
+2. Edit the 'config.ru' to add the HelloWorld application as the first Rack application in the stack. It should look like this:
+
+        <?php
+        // Load php-rack library
+        require_once ROOT.DS."vendor".DS."php-rack".DS."lib".DS."Rack.php";
+        
+        // Load the framework
+        require_once ROOT.DS."lib".DS."Phoenix".DS."Phoenix.php";
+        
+        Rack::add("HelloWorld", ROOT.DS."lib".DS."helloworld.php");
+        Rack::add("ErrorPageHandler", PHOENIX_PATH.DS."middleware".DS."ErrorPageHandler.php");
+        Rack::add("Phoenix", null, Phoenix::getInstance());
+
+        Rack::run();
+
+3. Access the '/hello_world' URL and you should get the response from your Rack Helloworld application, without event reaching to the ErrorPageHandler or the Phoenix Framework. Cool, isn't it?
+
 ## Thanks
 
 Some of the code is based on [silk](https://github.com/tedkulp/silk) by Ted Kulp and [Slim](https://github.com/codeguy/Slim) by Josh Lockhart. Thanks!
