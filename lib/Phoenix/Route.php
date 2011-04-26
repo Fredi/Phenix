@@ -122,9 +122,9 @@ class Route
 				foreach ($paramValues as $index => $value)
 				{
 					if ($index == "controller")
-						$this->setController($value);
+						$this->controller($value);
 					else if ($index == "action")
-						$this->setAction($value);
+						$this->action($value);
 				}
 			}
 			foreach ($paramNames as $index => $value)
