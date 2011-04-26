@@ -20,6 +20,8 @@ class Phoenix
 
 	protected $env;
 
+	private $variables = array();
+
 	public function __construct()
 	{
 		$this->session = new Session();
@@ -57,6 +59,18 @@ class Phoenix
 	public function run()
 	{
 		$this->response->write("Welcome to Phoenix");
+	}
+
+	public function __get($name)
+	{
+		if (!isset($this->variables[$name]))
+			return null;
+		return $this->variables[$name];
+	}
+
+	public function __set($name, $value)
+	{
+		$this->variables[$name] = $value;
 	}
 
 	public static function request()
