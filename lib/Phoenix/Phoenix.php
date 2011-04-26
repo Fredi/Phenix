@@ -36,7 +36,7 @@ class Phoenix
 	public static function autoload($class)
 	{
 		$lib = PHOENIX_PATH.DS.str_replace('_', DS, $class).".php";
-		if (file_exists($lib));
+		if (file_exists($lib))
 			require_once $lib;
 	}
 
