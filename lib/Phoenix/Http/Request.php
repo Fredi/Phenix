@@ -30,14 +30,14 @@ class Http_Request extends Request
 		if (file_exists($file_path))
 			require_once $file_path;
 		else
-			throw new ControllerNotFoundException;
+			throw new ControllerNotFoundException($file_path);
 
 		$class_name = camelize($class_file);
 
 		if (class_exists($class_name))
 			$controller = new $class_name();
 		else
-			throw new ControllerClassNotFoundException;
+			throw new ControllerClassNotFoundException($class_name);
 
 		$controller->runAction($route->action(), $route->getParams());
 	}
