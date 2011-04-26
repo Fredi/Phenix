@@ -33,7 +33,7 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
         ln -s /home/user/Phoenix/public /home/user/public_html
 
-  You can create a Virtual host too, but don't forget do set the DocumentRoot to the public directory.
+    You can create a Virtual host too, but don't forget do set the DocumentRoot to the public directory.
 
 2. Restart your server if needed and go to the url you just created and you'll see:
 
@@ -60,14 +60,14 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
         <p><?= $hello ?></p>
 
-  Now that you created the controller, the action inside it and the view of the action, let's create a route so the Phoenix Framework can call it.
+    Now that you created the controller, the action inside it and the view of the action, let's create a route so the Phoenix Framework can call it.
 
 4. Create a file called 'routes.php' inside the '/config' directory with the following code:
 
         <?php
         Phoenix::get('/', 'hello#index'); // Call the index action in the hello controller
 
-  In this case, where you want to call the 'index' action you could also specify just the controller, because 'index' is the default action.
+    In this case, where you want to call the 'index' action you could also specify just the controller, because 'index' is the default action.
 
 5. Now you are done! Just access the address you're serving the application and it should be rendering 'Hello World!'.
 
@@ -75,20 +75,20 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
 You can create routes using parameters, for example:
 
-        Phoenix::get('/:controller/:action');
-        Phoenix::get('/:controller');
+    Phoenix::get('/:controller/:action');
+    Phoenix::get('/:controller');
 
 This routes are using parameters, and Phoenix will know what to do if you access, lets say 'http://localhost/user/list'. It will call the 'list' action in the 'user' controller.
 
 You can pass Regex conditions to the parameters of your routes too, like:
 
-        Phoenix::get('/:controller/:action/:id)->conditions(array('id' => '\d{1,8}'));
+    Phoenix::get('/:controller/:action/:id)->conditions(array('id' => '\d{1,8}'));
 
 It will accept an id with just digits (max. 8 digits). If we try to access 'http://localhost/user/show/abc' it will not execute that route, because 'abc' isn't numeric.
 
 You can wrap all routes above in one using conditional parameters:
 
-        Phoenix::get('/:controller(/:action(/:id))')->conditions(array('id' => '\d{1,8}'));
+    Phoenix::get('/:controller(/:action(/:id))')->conditions(array('id' => '\d{1,8}'));
 
   Note that I'm using the ':action' and ':id' parameters inside parathesis.
 
@@ -96,10 +96,10 @@ You can wrap all routes above in one using conditional parameters:
 
 One nice thing you can do with RESTful Routes is to use just one URL but execute different actions depending on the request method:
 
-        Phoenix::get('/products', 'products#list');
-        Phoenix::post('/products', 'products#save');
-        Phoenix::put('/products', 'products#update');
-        Phoenix::delete('/products', 'products#destroy');
+    Phoenix::get('/products', 'products#list');
+    Phoenix::post('/products', 'products#save');
+    Phoenix::put('/products', 'products#update');
+    Phoenix::delete('/products', 'products#destroy');
 
 That's very nice!
 
