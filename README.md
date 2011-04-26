@@ -28,14 +28,23 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
 ### Installing Phoenix
 
-1. Download Phoenix and extract the downloaded file to your user's home directory or another without public web access.
-2. Create a symbolic link of the public directory to your public_html or www:
+1. Clone the Phoenix repository
+
+        git clone git://github.com/fredi/Phoenix.git
+
+2. Change directory to Phoenix, init and update submodules in the repository (php-rack)
+
+        cd Phoenix
+        git submodules init
+        git submodules update
+
+3. Create a symbolic link of the public directory to your public_html or www:
 
         ln -s /home/user/Phoenix/public /home/user/public_html
 
     You can create a Virtual host too, but don't forget do set the DocumentRoot to the public directory.
 
-2. Restart your server if needed and go to the url you just created and you'll see:
+4. Restart your server if needed and go to the url you just created and you'll see:
 
         "The page you were looking for doesn't exist."
 
