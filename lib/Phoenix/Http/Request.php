@@ -19,4 +19,32 @@ class Http_Request extends Request
 	{
 		return $this->env['REQUEST_METHOD'];
 	}
+
+	public function handleRequest()
+	{
+		$route = router()->getMatched();
+
+		$class_file = $route->controller().'_controller';
+
+		$file_path = ROOT.DS."app".DS."controllers".DS.$class_file.".php";
+		if (file_exists($file_path))
+			require_once $file_path;
+		else
+			throw new ControllerNotFoundException;
+
+		$class_name = camelize($class_file);
+
+		if (class_exists($class_name))
+			$controller = new $class_name();
+		else
+			throw new ControllerClassNotFoundException;
+
+		$controller->runAction($route->action(), $route->getParams());
+	}
 }
+
+class ControllerNotFoundException extends Exception {}
+
+class ControllerClassNotFoundException extends Exception {}
+
+class ViewNotFoundException extends Exception {}
