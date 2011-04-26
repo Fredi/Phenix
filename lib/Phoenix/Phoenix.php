@@ -76,10 +76,7 @@ class Phoenix
 	{
 		$this->setup();
 
-		if ($this->router->count())
-			$this->request->handleRequest();
-		else
-			$this->response->write("Welcome to Phoenix!");
+		$this->request->handleRequest();
 	}
 
 	public function __get($name)
