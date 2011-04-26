@@ -5,6 +5,9 @@ spl_autoload_register(array('Phoenix', 'autoload'));
 
 define("PHOENIX_PATH", ROOT.DS."lib".DS."Phoenix");
 
+// Load utility functions
+require_once PHOENIX_PATH.DS."utility.functions.php";
+
 /**
  * The core of Phoenix Framework
  */
