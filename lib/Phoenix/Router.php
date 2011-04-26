@@ -1,14 +1,12 @@
 <?php
 class Router
 {
-	private $request;
-
 	private $routes;
-	private $matched;
 
-	public function __construct(Http_Request $request)
+	private $count = 0;
+
+	public function __construct()
 	{
-		$this->request = $request;
 		$this->routes = array(
 			'GET' => array(),
 			'POST' => array(),
@@ -17,19 +15,17 @@ class Router
 		);
 	}
 
-	public function getMatched($reload = false)
+	public function getMatched()
 	{
-		if ($reload || is_null($this->matched))
+		$uri = request()->uri()->getUri();
+		$method = request()->getMethod();
+		foreach ($this->routes[$method] as $route)
 		{
-			$this->matched = array();
-			$method = $this->request->getMethod();
-			foreach ($this->routes[$method] as $route)
-			{
-				if ($route->matches($this->request->uri()->getUri()))
-					$this->matched[] = $route;
-			}
+			if ($route->matches($uri))
+				return $route;
 		}
-		return $this->matched;
+
+		throw new RouteNotMatchedException($uri);
 	}
 
 	public function map($pattern, $callable, $method)
@@ -37,6 +33,14 @@ class Router
         $route = new Route($pattern, $callable);
         $route->setRouter($this);
         $this->routes[$method][] = $route;
+		$this->count++;
         return $route;
     }
+
+	public function count()
+	{
+		return $this->count;
+	}
 }
+
+class RouteNotMatchedException extends Exception {}

@@ -11,8 +11,8 @@ class Route
 
 	protected $router;
 
-	protected $controller;
-	protected $action;
+	protected $controller = 'home';
+	protected $action = 'index';
 
 	public function __construct($pattern, $callable)
 	{
@@ -59,29 +59,25 @@ class Route
 			else if ($c == 0)
 				$controller = $callable;
 
-			$this->setController($controller);
-			$this->setAction($action);
+			$this->controller($controller);
+			$this->action($action);
 		}
 	}
 
-	private function setController($controller)
+	public function controller($controller = null)
 	{
-		$this->controller = $controller;
+		if (!is_null($controller))
+			$this->controller = $controller;
+		else
+			return $this->controller;
 	}
 
-	private function setAction($action)
+	public function action($action = null)
 	{
-		$this->action = $action;
-	}
-
-	private function getController()
-	{
-		return $this->controller;
-	}
-
-	private function getAction()
-	{
-		return $this->action;
+		if (!is_null($action))
+			$this->action = $action;
+		else
+			return $this->action;
 	}
 
 	public function getConditions()

@@ -51,7 +51,7 @@ class Phoenix
 
 		$this->request = new Http_Request($env);
 		$this->response = new Http_Response();
-		$this->router = new Router($this->request);
+		$this->router = new Router();
 
 		$this->run();
 
