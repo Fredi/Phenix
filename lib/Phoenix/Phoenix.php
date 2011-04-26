@@ -114,7 +114,7 @@ class Phoenix
 	protected static function mapRoute($type, $args)
 	{
 		if (count($args) < 2)
-			throw new InvalidArgumentException('Pattern and callable are required to create a route');
+			$args[] = null;
 
 		$pattern = array_shift($args);
 		$callable = array_pop($args);
