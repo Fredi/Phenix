@@ -149,4 +149,18 @@ class Phoenix
 		$args = func_get_args();
 		return self::mapRoute("DELETE", $args);
 	}
+
+	public static function notFound($message = '')
+	{
+		response()->status(404);
+		response()->clearBody();
+		response()->write('<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL was not found on this server.</p></body></html>');
+	}
+
+	public static function error($message = '')
+	{
+		response()->status(500);
+		response()->clearBody();
+		response()->write('<!DOCTYPE html><html><head><title>500 Internal Server Error</title></head><body><h1>Internal Server Error</h1><p>The Web server (running the Web Site) encountered an unexpected condition that prevented it from fulfilling the request by the client (e.g. your Web browser or our CheckUpDown robot) for access to the requested URL.</p></body></html>');
+	}
 }
