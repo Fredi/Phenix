@@ -64,10 +64,14 @@ class Controller
 
 	public function renderView($file)
 	{
+		$file = ROOT.DS."app".DS."views".DS.$file.".phtml";
+		if (!file_exists($file))
+			throw new ViewNotFoundException("View file for action '{$this->action}' doen't exist");
+
 		extract($this->variables);
 
 		@ob_start();
-		require ROOT.DS."app".DS."views".DS.$file.".phtml";
+		require $file;
 		$value = trim(@ob_get_contents());
 		@ob_end_clean();
 
