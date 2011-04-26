@@ -10,6 +10,7 @@ require_once ROOT.DS."vendor".DS."php-rack".DS."lib".DS."Rack.php";
 require_once ROOT.DS."lib".DS."Phoenix".DS."Phoenix.php";
 
 
+Rack::add("ErrorPageHandler", PHOENIX_PATH.DS."middleware".DS."ErrorPageHandler.php");
 Rack::add("Phoenix", null, Phoenix::getInstance());
 
 
