@@ -31,11 +31,6 @@ class Phoenix
 
 	private $variables = array();
 
-	public function __construct()
-	{
-		$this->session = new Session();
-	}
-
 	public static function getInstance()
 	{
 		if (!isset(self::$instance))
@@ -64,8 +59,6 @@ class Phoenix
 		$this->env = $env;
 
 		$this->request = new Http_Request($env);
-		$this->response = new Http_Response();
-		$this->router = new Router();
 
 		$this->run();
 
@@ -75,11 +68,12 @@ class Phoenix
 
 	public function setup()
 	{
+		$this->response = new Http_Response();
+		$this->router = new Router();
+		$this->session = new Session();
 
-		// Load application routes
-		$routes = ROOT.DS."config".DS."routes.php";
-		if (file_exists($routes))
-			require_once $routes;
+		$config = loadConfig();
+		set('config', $config);
 	}
 
 	public function run()
