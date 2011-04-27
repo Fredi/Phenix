@@ -99,3 +99,28 @@ function humanize($lower_case_and_underscored_word)
 {
 	return ucwords(str_replace("_", " ", $lower_case_and_underscored_word));
 }
+
+/**
+ * Load config and routes
+ */
+function loadConfig()
+{
+	$config_file = ROOT.DS."config".DS."config.php";
+
+	$loaded_config = array();
+
+	if (file_exists($config_file))
+	{
+		$config = null;
+		include($config_file);
+		if (is_array($config))
+			$loaded_config = $config;
+	}
+
+	$routes_file = ROOT.DS."config".DS."routes.php";
+
+	if (file_exists($routes_file))
+		include($routes_file);
+
+	return $loaded_config;
+}
