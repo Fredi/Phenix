@@ -53,7 +53,7 @@ class Phoenix
 		else if (file_exists(HELPERS_PATH.DS.strtolower($class).'.php'))
 			require_once(HELPERS_PATH.DS.strtolower($class).'.php');
 		else
-			throw new Exception("Class not found: {$class}");
+			throw new ClassNotFoundException("Class not found: {$class}");
 	}
 
 	function call(&$env)
@@ -182,3 +182,5 @@ class Phoenix
 		response()->write('<!DOCTYPE html><html><head><title>500 Internal Server Error</title></head><body><h1>Internal Server Error</h1><p>The Web server (running the Web Site) encountered an unexpected condition that prevented it from fulfilling the request by the client (e.g. your Web browser or our CheckUpDown robot) for access to the requested URL.</p></body></html>');
 	}
 }
+
+class ClassNotFoundException extends Exception {}

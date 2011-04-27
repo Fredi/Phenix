@@ -34,6 +34,8 @@ class Controller
 			$value = trim(@ob_get_contents());
 			@ob_end_clean();
 		}
+		else
+			throw new ActionNotFoundException($action);
 
 		if ($value === null || empty($value))
 			$value = $this->renderAction();
@@ -66,7 +68,7 @@ class Controller
 	{
 		$file = ROOT.DS."app".DS."views".DS.$file.".phtml";
 		if (!file_exists($file))
-			throw new ViewNotFoundException("View file for action '{$this->action}' doen't exist");
+			throw new TemplateNotFoundException("View file for action '{$this->action}' doen't exist");
 
 		extract($this->variables);
 
@@ -93,3 +95,6 @@ class Controller
 		$this->variables[$name] = $value;
 	}
 }
+
+class ActionNotFoundException extends Exception {}
+

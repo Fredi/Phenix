@@ -56,4 +56,4 @@ class Http_Request extends Request
 
 class ControllerNotFoundException extends Exception {}
 
-class ViewNotFoundException extends Exception {}
+class TemplateNotFoundException extends Exception {}
