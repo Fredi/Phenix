@@ -22,35 +22,19 @@ class Http_Request extends Request
 
 	public function handleRequest()
 	{
-		try
-		{
-			$route = router()->getMatched();
+		$route = router()->getMatched();
 
-			$class_name = camelize($route->controller().'_controller');
+		$class_name = camelize($route->controller().'_controller');
 
-			if (class_exists($class_name))
-				$controller = new $class_name();
-			else
-				throw new ControllerNotFoundException($class_name);
+		if (!file_exists(CONTROLLERS_PATH.DS.underscore($class_name).'.php'))
+			throw new ControllerNotFoundException($class_name);
 
-			$controller->runAction($route->action(), $route->getParams());
-		}
-		catch (RouteNotMatchedException $e)
-		{
-			Phoenix::notFound($e);
-		}
-		catch (ControllerNotFoundException $e)
-		{
-			Phoenix::notFound($e);
-		}
-		catch (ViewNotFoundException $e)
-		{
-			Phoenix::notFound($e);
-		}
-		catch (Exception $e)
-		{
-			Phoenix::error($e);
-		}
+		if (class_exists($class_name))
+			$controller = new $class_name();
+		else
+			throw new ControllerNotFoundException($class_name);
+
+		$controller->runAction($route->action(), $route->getParams());
 	}
 }
 
