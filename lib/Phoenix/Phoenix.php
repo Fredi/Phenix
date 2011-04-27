@@ -74,6 +74,21 @@ class Phoenix
 
 		$config = loadConfig();
 		set('config', $config);
+
+		if (isset($config['database']['driver']))
+		{
+			$database = $config['database'];
+
+			require_once(ROOT.DS."vendor".DS."idiorm".DS."idiorm.php");
+			require_once(ROOT.DS."vendor".DS."paris".DS."paris.php");
+
+			ORM::configure($database['driver']);
+
+			unset($database['driver']);
+
+			foreach ($database as $key => $val)
+				ORM::configure($key, $val);
+		}
 	}
 
 	public function run()
