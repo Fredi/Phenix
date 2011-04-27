@@ -5,6 +5,12 @@ spl_autoload_register(array('Phoenix', 'autoload'));
 
 define("PHOENIX_PATH", ROOT.DS."lib".DS."Phoenix");
 
+define("APP_PATH", ROOT.DS."app");
+define("CONTROLLERS_PATH", APP_PATH.DS."controllers");
+define("MODELS_PATH", APP_PATH.DS."models");
+define("VIEWS_PATH", APP_PATH.DS."views");
+define("HELPERS_PATH", APP_PATH.DS."helpers");
+
 // Load utility functions
 require_once PHOENIX_PATH.DS."utility.functions.php";
 
