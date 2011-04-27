@@ -26,20 +26,12 @@ class Http_Request extends Request
 		{
 			$route = router()->getMatched();
 
-			$class_file = $route->controller().'_controller';
-
-			$file_path = ROOT.DS."app".DS."controllers".DS.$class_file.".php";
-			if (file_exists($file_path))
-				require_once $file_path;
-			else
-				throw new ControllerNotFoundException($file_path);
-
-			$class_name = camelize($class_file);
+			$class_name = camelize($route->controller().'_controller');
 
 			if (class_exists($class_name))
 				$controller = new $class_name();
 			else
-				throw new ControllerClassNotFoundException($class_name);
+				throw new ControllerNotFoundException($class_name);
 
 			$controller->runAction($route->action(), $route->getParams());
 		}
@@ -48,10 +40,6 @@ class Http_Request extends Request
 			Phoenix::notFound($e);
 		}
 		catch (ControllerNotFoundException $e)
-		{
-			Phoenix::notFound($e);
-		}
-		catch (ControllerClassNotFoundException $e)
 		{
 			Phoenix::notFound($e);
 		}
@@ -67,7 +55,5 @@ class Http_Request extends Request
 }
 
 class ControllerNotFoundException extends Exception {}
-
-class ControllerClassNotFoundException extends Exception {}
 
 class ViewNotFoundException extends Exception {}
