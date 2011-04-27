@@ -70,6 +70,9 @@ class Phoenix
 
 	public function setup()
 	{
+		if (!isset($_SESSION))
+			session_start();
+
 		$this->response = new Http_Response();
 		$this->router = new Router();
 		$this->session = new Session();
