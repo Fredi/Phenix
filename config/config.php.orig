@@ -1,2 +1,10 @@
 <?php
-//TODO
+// Configuration
+
+$config = array(
+	'database' => array(
+		'driver' => 'mysql:host=localhost;dbname=my_database',
+		'username' => 'root',
+		'password' => ''
+	)
+);
