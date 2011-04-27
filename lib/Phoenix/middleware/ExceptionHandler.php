@@ -27,9 +27,9 @@
 */
 
 /**
- * Middleware to show our custom error pages if exist
+ * Middleware to handle exceptions
  */
-class ErrorPageHandler
+class ExceptionHandler
 {
 	function __construct(&$app)
 	{
