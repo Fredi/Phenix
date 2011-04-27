@@ -10,7 +10,7 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 * RESTful HTTP routes (GET, POST, PUT, DELETE)
 * Built on a library similar to [Rack](http://rack.rubyforge.org/) for easy middleware-based expandability
 * Database support with [Idiorm](https://github.com/j4mie/idiorm) and [Paris](https://github.com/j4mie/paris) for Active Record
-* Error handling
+* Error handling (show details only locally)
 * Supports PHP 5+
 
 ### Coming soon
@@ -18,7 +18,6 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 * Some kind of extension system
 * Integration with template engines like [Twig](http://www.twig-project.org/) or [Smarty](http://www.smarty.net/)
 * Unit testing w/ [PHPUnit](https://github.com/sebastianbergmann/phpunit/)
-* Set development mode to show error details
 * Flash messaging
 * Caching system
 * Logging system
