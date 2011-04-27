@@ -48,7 +48,15 @@ class Phoenix
 	{
 		$lib = PHOENIX_PATH.DS.str_replace('_', DS, $class).".php";
 		if (file_exists($lib))
-			require_once $lib;
+			require_once($lib);
+		else if (file_exists(CONTROLLERS_PATH.DS.underscore($class).'.php'))
+			require_once(CONTROLLERS_PATH.DS.underscore($class).'.php');
+		else if (file_exists(MODELS_PATH.DS.strtolower($class).'.php'))
+			require_once(MODELS_PATH.DS.strtolower($class).'.php');
+		else if (file_exists(HELPERS_PATH.DS.strtolower($class).'.php'))
+			require_once(HELPERS_PATH.DS.strtolower($class).'.php');
+		else
+			throw new Exception("Class not found: {$class}");
 	}
 
 	function call(&$env)
