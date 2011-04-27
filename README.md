@@ -9,12 +9,12 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 * Simple MVC architecture
 * RESTful HTTP routes (GET, POST, PUT, DELETE)
 * Built on a library similar to [Rack](http://rack.rubyforge.org/) for easy middleware-based expandability
+* Database support with [Idiorm](https://github.com/j4mie/idiorm) and [Paris](https://github.com/j4mie/paris) for Active Record
 * Error handling
 * Supports PHP 5+
 
 ### Coming soon
 
-* Hability to integrate with ORM classes like [Idiorm](https://github.com/j4mie/idiorm) or [Doctrine](http://www.doctrine-project.org/)
 * Some kind of extension system
 * Integration with template engines like [Twig](http://www.twig-project.org/) or [Smarty](http://www.smarty.net/)
 * Unit testing w/ [PHPUnit](https://github.com/sebastianbergmann/phpunit/)
@@ -32,7 +32,7 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
         git clone git://github.com/fredi/Phoenix.git
 
-2. Change directory to Phoenix, init and update submodules in the repository (php-rack)
+2. Change directory to Phoenix, init and update submodules in the repository (php-rack, idiorm and paris)
 
         cd Phoenix
         git submodules init
@@ -147,7 +147,9 @@ So, we will make a HelloWorld class that will return 'Hello World!' if we access
         require_once ROOT.DS."lib".DS."Phoenix".DS."Phoenix.php";
         
         Rack::add("HelloWorld", ROOT.DS."lib".DS."helloworld.php");
-        Rack::add("ErrorPageHandler", PHOENIX_PATH.DS."middleware".DS."ErrorPageHandler.php");
+        Rack::add("ExceptionHandler", MIDDLEWARE_PATH.DS."ExceptionHandler.php");
+        Rack::add("MethodOverride", MIDDLEWARE_PATH.DS."MethodOverride.php");
+        Rack::add("HeadRequest", MIDDLEWARE_PATH.DS."HeadRequest.php");
         Rack::add("Phoenix", null, Phoenix::getInstance());
 
         Rack::run();
