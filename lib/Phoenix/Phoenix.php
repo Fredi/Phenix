@@ -75,10 +75,6 @@ class Phoenix
 
 	public function setup()
 	{
-		// Load ApplicationController if it exists
-		$app_controller = ROOT.DS."app".DS."controllers".DS."application_controller.php";
-		if (file_exists($app_controller))
-			require_once $app_controller;
 
 		// Load application routes
 		$routes = ROOT.DS."config".DS."routes.php";
