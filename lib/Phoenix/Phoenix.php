@@ -11,6 +11,8 @@ define("MODELS_PATH", APP_PATH.DS."models");
 define("VIEWS_PATH", APP_PATH.DS."views");
 define("HELPERS_PATH", APP_PATH.DS."helpers");
 
+define("MIDDLEWARE_PATH", PHOENIX_PATH.DS."middleware");
+
 // Load utility functions
 require_once PHOENIX_PATH.DS."utility.functions.php";
 
