@@ -105,16 +105,30 @@ function humanize($lower_case_and_underscored_word)
  */
 function loadConfig()
 {
+	$default_config = array(
+		// Database
+		'database' => array(),
+		// Log
+		'log_enabled' => false,
+		'log_class' => null,
+		'log_path' => 'log',
+		'log_level' => 4,
+		// Debug
+		'debug' => true,
+		// View
+		'view_class' => 'View'
+	);
+
 	$config_file = ROOT.DS."config".DS."config.php";
 
-	$loaded_config = array();
+	$loaded_config = $default_config;
 
 	if (file_exists($config_file))
 	{
 		$config = null;
 		include($config_file);
 		if (is_array($config))
-			$loaded_config = $config;
+			$loaded_config = array_merge($default_config, $config);
 	}
 
 	$routes_file = ROOT.DS."config".DS."routes.php";
