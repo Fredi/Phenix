@@ -4,28 +4,28 @@
  */
 
 /**
- * Returns the instance of Phoenix Framework class
+ * Returns the instance of the Phenix Framework class
  */
-function phoenix()
+function phenix()
 {
-	return Phoenix::getInstance();
+	return Phenix::getInstance();
 }
 
 /**
- * Return a Phoenix variable
+ * Return a Phenix variable
  */
 function get($name, $default = null)
 {
-	$value = phoenix()->$name;
+	$value = phenix()->$name;
 	return is_null($value) ? $default : $value;
 }
 
 /**
- * Set a Phoenix variable
+ * Set a Phenix variable
  */
 function set($name, $value)
 {
-	phoenix()->$name = $value;
+	phenix()->$name = $value;
 }
 
 /**
@@ -33,7 +33,7 @@ function set($name, $value)
  */
 function request()
 {
-	return Phoenix::request();
+	return Phenix::request();
 }
 
 /**
@@ -41,7 +41,7 @@ function request()
  */
 function response()
 {
-	return Phoenix::response();
+	return Phenix::response();
 }
 
 /**
@@ -49,7 +49,7 @@ function response()
  */
 function session()
 {
-	return Phoenix::session();
+	return Phenix::session();
 }
 
 /**
@@ -57,7 +57,7 @@ function session()
  */
 function router()
 {
-	return Phoenix::router();
+	return Phenix::router();
 }
 
 /**

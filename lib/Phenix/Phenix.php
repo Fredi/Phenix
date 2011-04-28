@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL | E_STRICT);
 
-spl_autoload_register(array('Phoenix', 'autoload'));
+spl_autoload_register(array('Phenix', 'autoload'));
 
-define("PHOENIX_PATH", ROOT.DS."lib".DS."Phoenix");
+define("PHENIX_PATH", ROOT.DS."lib".DS."Phenix");
 
 define("APP_PATH", ROOT.DS."app");
 define("CONTROLLERS_PATH", APP_PATH.DS."controllers");
@@ -14,15 +14,15 @@ define("HELPERS_PATH", APP_PATH.DS."helpers");
 define("LOG", ROOT.DS."log");
 define("TMP", ROOT.DS."tmp");
 
-define("MIDDLEWARE_PATH", PHOENIX_PATH.DS."middleware");
+define("MIDDLEWARE_PATH", PHENIX_PATH.DS."middleware");
 
 // Load utility functions
-require_once PHOENIX_PATH.DS."utility.functions.php";
+require_once PHENIX_PATH.DS."utility.functions.php";
 
 /**
- * The core of Phoenix Framework
+ * The core of Phenix Framework
  */
-class Phoenix
+class Phenix
 {
 	private static $instance;
 
@@ -46,7 +46,7 @@ class Phoenix
 
 	public static function autoload($class)
 	{
-		$lib = PHOENIX_PATH.DS.str_replace('_', DS, $class).".php";
+		$lib = PHENIX_PATH.DS.str_replace('_', DS, $class).".php";
 		if (file_exists($lib))
 			require_once($lib);
 		else if (file_exists(CONTROLLERS_PATH.DS.underscore($class).'.php'))
@@ -152,7 +152,7 @@ class Phoenix
 			exit;
 		}
 		else
-			throw new InvalidArgumentException('Phoenix::redirect only accepts HTTP 300-307 status codes.');
+			throw new InvalidArgumentException('Phenix::redirect only accepts HTTP 300-307 status codes.');
 	}
 
 	protected static function mapRoute($type, $args)

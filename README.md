@@ -1,6 +1,6 @@
-# Phoenix Framework
+# Phenix Framework
 
-Phoenix is a mini RESTful MVC framework on top of php-rack inspired by [Rails](http://rubyonrails.org/).
+Phenix is a mini RESTful MVC framework on top of php-rack inspired by [Rails](http://rubyonrails.org/).
 
 php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is currently maintained by [Ted Kulp](https://github.com/tedkulp)
 
@@ -24,21 +24,21 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
 ## Getting Started
 
-### Installing Phoenix
+### Installing Phenix
 
-1. Clone the Phoenix repository
+1. Clone the Phenix repository
 
-        git clone git://github.com/fredi/Phoenix.git
+        git clone git://github.com/fredi/Phenix.git
 
-2. Change directory to Phoenix, init and update submodules in the repository (php-rack, idiorm and paris)
+2. Change directory to Phenix, init and update submodules in the repository (php-rack, idiorm and paris)
 
-        cd Phoenix
+        cd Phenix
         git submodules init
         git submodules update
 
 3. Create a symbolic link of the public directory to your public_html or www:
 
-        ln -s /home/user/Phoenix/public /home/user/public_html
+        ln -s /home/user/Phenix/public /home/user/public_html
 
     You can create a Virtual host too, but don't forget do set the DocumentRoot to the public directory.
 
@@ -67,12 +67,12 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
         <p><?= $hello ?></p>
 
-    Now that you created the controller, the action inside it and the view of the action, let's create a route so the Phoenix Framework can call it.
+    Now that you created the controller, the action inside it and the view of the action, let's create a route so the Phenix Framework can call it.
 
 4. Create a file called 'routes.php' inside the '/config' directory with the following code:
 
         <?php
-        Phoenix::get('/', 'hello#index'); // Call the index action in the hello controller
+        Phenix::get('/', 'hello#index'); // Call the index action in the hello controller
 
     In this case, where you want to call the 'index' action you could also specify just the controller, because 'index' is the default action.
 
@@ -82,20 +82,20 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
 You can create routes using parameters, for example:
 
-    Phoenix::get('/:controller/:action');
-    Phoenix::get('/:controller');
+    Phenix::get('/:controller/:action');
+    Phenix::get('/:controller');
 
-This routes are using parameters, and Phoenix will know what to do if you access, lets say 'http://localhost/user/list'. It will call the 'list' action in the 'user' controller.
+This routes are using parameters, and Phenix will know what to do if you access, lets say 'http://localhost/user/list'. It will call the 'list' action in the 'user' controller.
 
 You can pass Regex conditions to the parameters of your routes too, like:
 
-    Phoenix::get('/:controller/:action/:id)->conditions(array('id' => '\d{1,8}'));
+    Phenix::get('/:controller/:action/:id)->conditions(array('id' => '\d{1,8}'));
 
 It will accept an id with just digits (max. 8 digits). If we try to access 'http://localhost/user/show/abc' it will not execute that route, because 'abc' isn't numeric.
 
 You can wrap all routes above in one using conditional parameters:
 
-    Phoenix::get('/:controller(/:action(/:id))')->conditions(array('id' => '\d{1,8}'));
+    Phenix::get('/:controller(/:action(/:id))')->conditions(array('id' => '\d{1,8}'));
 
   Note that I'm using the ':action' and ':id' parameters inside parathesis.
 
@@ -103,10 +103,10 @@ You can wrap all routes above in one using conditional parameters:
 
 One nice thing you can do with RESTful Routes is to use just one URL but execute different actions depending on the request method:
 
-    Phoenix::get('/products', 'products#list');
-    Phoenix::post('/products', 'products#save');
-    Phoenix::put('/products', 'products#update');
-    Phoenix::delete('/products', 'products#destroy');
+    Phenix::get('/products', 'products#list');
+    Phenix::post('/products', 'products#save');
+    Phenix::put('/products', 'products#update');
+    Phenix::delete('/products', 'products#destroy');
 
 That's very nice!
 
@@ -142,13 +142,13 @@ So, we will make a HelloWorld class that will return 'Hello World!' if we access
         require_once ROOT.DS."vendor".DS."php-rack".DS."lib".DS."Rack.php";
         
         // Load the framework
-        require_once ROOT.DS."lib".DS."Phoenix".DS."Phoenix.php";
+        require_once ROOT.DS."lib".DS."Phenix".DS."Phenix.php";
         
         Rack::add("HelloWorld", ROOT.DS."lib".DS."helloworld.php");
         Rack::add("ExceptionHandler", MIDDLEWARE_PATH.DS."ExceptionHandler.php");
         Rack::add("MethodOverride", MIDDLEWARE_PATH.DS."MethodOverride.php");
         Rack::add("HeadRequest", MIDDLEWARE_PATH.DS."HeadRequest.php");
-        Rack::add("Phoenix", null, Phoenix::getInstance());
+        Rack::add("Phenix", null, Phenix::getInstance());
 
         Rack::run();
 
@@ -156,9 +156,9 @@ So, we will make a HelloWorld class that will return 'Hello World!' if we access
 
 ### Resources
 
-You can find additional resources in the Phoenix-Extras repository, like custom views (to render using Twig, Smarty or another template engine).
+You can find additional resources in the Phenix-Extras repository, like custom views (to render using Twig, Smarty or another template engine).
 
-<https://github.com/fredi/Phoenix-Extras>
+<https://github.com/fredi/Phenix-Extras>
 
 ## Thanks
 
@@ -166,4 +166,4 @@ Some of the code is based on [silk](https://github.com/tedkulp/silk) by Ted Kulp
 
 ## License
 
-Phoenix is released under the MIT license.
+Phenix is released under the MIT license.
