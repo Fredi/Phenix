@@ -34,7 +34,37 @@ class Http_Request extends Request
 		else
 			throw new ControllerNotFoundException($class_name);
 
-		$controller->runAction($route->action(), $route->getParams());
+		$action = $route->action();
+		$params = $route->getParams();
+
+		$controller->params = $params;
+		$controller->action = $action;
+
+		$this->dispatch($controller, $action, $params);
+	}
+
+	private function dispatch(&$controller, $action, $params)
+	{
+		$controller->beforeFilter();
+
+		$output = null;
+
+		if (method_exists($controller, $action))
+		{
+			ob_start();
+			$output = call_user_func_array(array(&$controller, $action), $params);
+			$output = trim(ob_get_clean());
+		}
+		else
+			throw new ActionNotFoundException($action);
+
+		if ($output === null || empty($output))
+			$output = $controller->render();
+
+		$controller->afterFilter();
+
+		$response = response();
+		$response->write($output);
 	}
 }
 

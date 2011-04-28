@@ -1,94 +1,89 @@
 <?php
 class Controller
 {
-	protected $render_layout = true;
+	/**
+	 * Name of the controller
+	 */
+	public $name = null;
 
-	protected $layout_name = 'application';
+	/**
+	 *	The action to be executed
+	 */
+	public $action = null;
 
-	protected $action = '';
+	/**
+	 * Layout template to render within the action template
+	 */
+	public $layout = 'application';
 
-	protected $params = array();
+	/**
+	 * Parameters received in the current request
+	 */
+	public $params = array();
 
-	protected $variables = array();
+	/**
+	 * Variables to pass to the view
+	 */
+	public $variables = array();
 
-	protected $status = 200;
+	/**
+	 * Render the layout automatically around the view
+	 */
+	public $renderLayout = true;
 
-	public function runAction($action, $params = array())
+	/**
+	 * The name of the view class we will use to render the output
+	 */
+	public $view = 'View';
+
+	/**
+	 * The folder to this controller's views
+	 */
+	public $viewPath = null;
+
+	/**
+	 * File extension of view templates
+	 */
+	public $ext = '.phtml';
+
+	/**
+	 * Output of the requested action
+	 */
+	public $output = null;
+
+	public function __construct()
+	{
+		if (is_null($this->name))
+			$this->name = strtolower(str_replace("Controller", "", get_class($this)));
+
+		if (is_null($this->viewPath))
+			$this->viewPath = underscore($this->name);
+	}
+
+	/**
+	 * Redirects an action to another without performing a traditional redirect
+	 */
+	public function setAction($action)
 	{
 		$this->action = $action;
-
-		set('current_action', $action);
-		set('current_controller', strtolower(str_replace("Controller", "", get_class($this))));
-
-		$this->params = $params;
-		$this->set('params', $params);
-
-		$this->beforeFilter();
-
-		$value = null;
-
-		if (method_exists($this, $action))
-		{
-			@ob_start();
-			$value = call_user_func_array(array($this, $action), array($params));
-			$value = trim(@ob_get_contents());
-			@ob_end_clean();
-		}
-		else
-			throw new ActionNotFoundException($action);
-
-		if ($value === null || empty($value))
-			$value = $this->renderAction();
-
-		if ($this->render_layout)
-		{
-			$this->set('yield', $value);
-			$value = $this->renderLayout();
-		}
-
-		$this->afterFilter();
-
-		$response = response();
-		$response->status($this->status);
-
-		$response->write($value);
+		$args = func_get_args();
+		unset($args[0]);
+		return call_user_func_array(array(&$this, $action), $args);
 	}
 
-	public function renderAction()
+	public function render($action = null, $layout = null, $file = null)
 	{
-		return $this->renderView(get('current_controller').DS.$this->action);
+		$viewClass = $this->view;
+
+		$view = new $viewClass($this);
+
+		$this->output .= $view->render($action, $layout, $file);
+
+		return $this->output;
 	}
+	public function beforeFilter() {}
 
-	public function renderLayout()
-	{
-		return $this->renderView("layouts".DS.$this->layout_name);
-	}
-
-	public function renderView($file)
-	{
-		$file = ROOT.DS."app".DS."views".DS.$file.".phtml";
-		if (!file_exists($file))
-			throw new TemplateNotFoundException("View file for action '{$this->action}' doen't exist");
-
-		extract($this->variables);
-
-		@ob_start();
-		require $file;
-		$value = trim(@ob_get_contents());
-		@ob_end_clean();
-
-		return $value;
-	}
-
-	public function beforeFilter()
-	{
-	
-	}
-
-	public function afterFilter()
-	{
-	
-	}
+	public function afterFilter() {}
 
 	public function set($name, $value)
 	{
