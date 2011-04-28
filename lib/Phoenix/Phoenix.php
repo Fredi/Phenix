@@ -55,8 +55,6 @@ class Phoenix
 			require_once(MODELS_PATH.DS.strtolower($class).'.php');
 		else if (file_exists(HELPERS_PATH.DS.strtolower($class).'.php'))
 			require_once(HELPERS_PATH.DS.strtolower($class).'.php');
-		else
-			throw new ClassNotFoundException("Class not found: {$class}");
 	}
 
 	function call(&$env)
