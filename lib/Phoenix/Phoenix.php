@@ -11,6 +11,9 @@ define("MODELS_PATH", APP_PATH.DS."models");
 define("VIEWS_PATH", APP_PATH.DS."views");
 define("HELPERS_PATH", APP_PATH.DS."helpers");
 
+define("LOG", ROOT.DS."log");
+define("TMP", ROOT.DS."tmp");
+
 define("MIDDLEWARE_PATH", PHOENIX_PATH.DS."middleware");
 
 // Load utility functions
@@ -94,6 +97,11 @@ class Phoenix
 			foreach ($database as $key => $val)
 				ORM::configure($key, $val);
 		}
+
+		if (!is_dir(LOG))
+			mkdir(LOG);
+		if (!is_dir(TMP))
+			mkdir(TMP);
 	}
 
 	public function run()
