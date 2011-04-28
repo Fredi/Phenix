@@ -29,4 +29,35 @@ class Http_Response extends Response
 		$this->body = array();
 		$this->length = 0;
 	}
+
+	public function sendHeaders()
+	{
+		foreach ($this->headers as $k => $v)
+		{
+			if (is_int($k))
+				header($v, true);
+			else
+				header("{$k}: {$v}", true);
+		}
+	}
+
+	public function render()
+	{
+		$statuses = Rack::http_status_codes();
+		$status_message = $statuses[$this->status];
+
+		$this->headers[] = "HTTP/1.1 {$this->status} {$status_message}";
+		$this->headers['Status'] = "{$this->status} {$status_message}";
+
+		$this->sendHeaders();
+
+		$body = join("\r\n", (array)$this->body);
+
+		$split_ary = str_split($body, 8192);
+
+		foreach ($split_ary as $one_item)
+		{
+			echo $one_item;
+		}
+	}
 }
