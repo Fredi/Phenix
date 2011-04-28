@@ -12,14 +12,14 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 * Database support with [Idiorm](https://github.com/j4mie/idiorm) and [Paris](https://github.com/j4mie/paris) for Active Record
 * Template system that allows custom views (ie. [Twig](http://www.twig-project.org/), [Smarty](http://www.smarty.net/), ...)
 * Error handling (show details only locally)
-* Supports PHP 5+
+* Supports PHP 5.1.2+
 
 ### Coming soon
 
-* Unit testing w/ [PHPUnit](https://github.com/sebastianbergmann/phpunit/)
 * Flash messaging
-* Caching system
 * Logging system
+* Caching system
+* Unit testing w/ [PHPUnit](https://github.com/sebastianbergmann/phpunit/)
 * Command line system to generate controllers/views and models
 
 ## Getting Started
@@ -110,7 +110,7 @@ One nice thing you can do with RESTful Routes is to use just one URL but execute
 
 That's very nice!
 
-### Making a "Hello World" Rack Application
+### Making a "Hello World" Rack Middleware
 
 Maybe you are asking yourself "what the hell is Rack?". It's basically an interface that sits between the HTTP request and our Application. [Check this out](https://github.com/tedkulp/php-rack#readme) for more information.
 
@@ -152,7 +152,13 @@ So, we will make a HelloWorld class that will return 'Hello World!' if we access
 
         Rack::run();
 
-3. Access the '/hello_world' URL and you should get the response from your Rack Helloworld application, without event reaching to the ErrorPageHandler or the Phoenix Framework. Cool, isn't it?
+3. Access the '/hello_world' URL and you should get the response from your Rack Helloworld application, without even executing another middleware in the stack. So if you want to perform a simple action and respond to the user, you could create your own Rack middleware, use it and spare some milliseconds. Cool, isn't it?
+
+### Resources
+
+You can find additional resources in the Phoenix-Extras repository, like custom views (to render using Twig, Smarty or another template engine).
+
+<https://github.com/fredi/Phoenix-Extras>
 
 ## Thanks
 
