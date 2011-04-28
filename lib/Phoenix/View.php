@@ -55,6 +55,7 @@ class View
 	{
 		if (is_object($controller))
 		{
+			$this->name = $controller->name;
 			$this->action = $controller->action;
 			$this->layout = $controller->layout;
 			$this->params = $controller->params;
