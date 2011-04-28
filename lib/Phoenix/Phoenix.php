@@ -135,6 +135,20 @@ class Phoenix
 		return self::$instance->router;
 	}
 
+	public static function redirect($url, $status = 301)
+	{
+		if ($status >= 300 && $status <= 307)
+		{
+			$response = self::response();
+			$response->redirect((string)$url, $status);
+			$response->clearBody();
+			$response->render();
+			exit;
+		}
+		else
+			throw new InvalidArgumentException('Phoenix::redirect only accepts HTTP 300-307 status codes.');
+	}
+
 	protected static function mapRoute($type, $args)
 	{
 		if (count($args) < 2)
