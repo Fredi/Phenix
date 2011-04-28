@@ -1,5 +1,6 @@
 <?
-$session = new Session();
+$session = session();
+$headers = response()->headers();
 ?>
 
 <h2 style="margin-top: 30px">Request</h2>
@@ -13,4 +14,4 @@ $session = new Session();
 
 
 <h2 style="margin-top: 30px">Response</h2>
-<p><b>Headers</b>: <pre><?= isset($response) ? print_r($response->headers, true) : 'None' ?></pre></p>
+<p><b>Headers</b>: <pre><?= count($headers) ? print_r($headers, true) : 'None' ?></pre></p>
