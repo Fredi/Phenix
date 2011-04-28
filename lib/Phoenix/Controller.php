@@ -75,6 +75,10 @@ class Controller
 	{
 		$viewClass = $this->view;
 
+		// If the class doesn't exist the autoloader will throw an exception
+		if (!class_exists($viewClass))
+			exit;
+
 		$view = new $viewClass($this);
 
 		$this->output .= $view->render($action, $layout, $file);
