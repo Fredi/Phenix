@@ -125,6 +125,8 @@ class View
 		if (is_null($name))
 			$name = $this->action;
 
+		$name = str_replace("/", DS, $name);
+
 		$file = VIEWS_PATH.DS.$this->viewPath.DS.$name.$this->ext;
 
 		if (!file_exists($file))
@@ -137,6 +139,8 @@ class View
 	{
 		if (is_null($name))
 			$name = $this->layout;
+
+		$name = str_replace("/", DS, $name);
 
 		$file = VIEWS_PATH.DS."layouts".DS.$name.$this->ext;
 
