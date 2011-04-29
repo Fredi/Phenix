@@ -35,7 +35,7 @@ class Http_Request extends Request
 			throw new ControllerNotFoundException($class_name);
 
 		$action = $route->action();
-		$params = $route->getParams();
+		$params = array_merge($route->getParams(), $this->params());
 
 		$controller->params = $params;
 		$controller->action = $action;
@@ -52,7 +52,7 @@ class Http_Request extends Request
 		if (method_exists($controller, $action))
 		{
 			ob_start();
-			$output = call_user_func_array(array(&$controller, $action), $params);
+			$output = call_user_func_array(array(&$controller, $action), array($params));
 			$output = trim(ob_get_clean());
 		}
 		else
