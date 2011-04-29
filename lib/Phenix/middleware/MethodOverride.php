@@ -13,7 +13,7 @@ class MethodOverride
 		if ($env['REQUEST_METHOD'] == "POST")
 		{
 			$req = new Request($env);
-			$method = isset($req['_method']) ? $req['_method'] : $env['HTTP_X_HTTP_METHOD_OVERRIDE'];
+			$method = isset($req['_method']) ? $req['_method'] : @$env['HTTP_X_HTTP_METHOD_OVERRIDE'];
 			$method = strtoupper($method);
 			if (in_array($method, $this->http_methods))
 			{
