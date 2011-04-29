@@ -34,6 +34,8 @@ class Phenix
 
 	protected $env;
 
+	protected $flash;
+
 	private $variables = array();
 
 	public static function getInstance()
@@ -95,6 +97,8 @@ class Phenix
 			foreach ($database as $key => $val)
 				ORM::configure($key, $val);
 		}
+
+		$this->flash = new Session_Flash($config['flash_key']);
 
 		if (!is_dir(LOG))
 			mkdir(LOG);
@@ -189,6 +193,21 @@ class Phenix
 	{
 		$args = func_get_args();
 		return self::mapRoute("DELETE", $args);
+	}
+
+	public static function flash($type, $message)
+	{
+		self::$instance->flash->set($type, $message);
+	}
+
+	public static function flashNow($type, $message)
+	{
+		self::$instance->flash->setNow($type, $message);
+	}
+
+	public function getFlash()
+	{
+		return $this->flash->toArray();
 	}
 }
 

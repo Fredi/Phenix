@@ -74,6 +74,9 @@ class Controller
 		if (!class_exists($viewClass))
 			exit;
 
+		// Set the $flash variable for use in the view
+		$this->variables['flash'] = phenix()->getFlash();
+
 		$view = new $viewClass($this);
 
 		$this->output .= $view->render($action, $layout, $file);

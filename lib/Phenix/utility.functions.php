@@ -115,8 +115,8 @@ function loadConfig()
 		'log_level' => 4,
 		// Debug
 		'debug' => true,
-		// View
-		'view_class' => 'View'
+		// Flash session key
+		'flash_key' => 'flash'
 	);
 
 	$config_file = ROOT.DS."config".DS."config.php";
@@ -137,4 +137,14 @@ function loadConfig()
 		include($routes_file);
 
 	return $loaded_config;
+}
+
+function flash($type, $message)
+{
+	Phenix::flash($type, $message);
+}
+
+function flashNow($type, $message)
+{
+	Phenix::flashNow($type, $message);
 }
