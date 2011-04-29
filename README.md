@@ -154,7 +154,7 @@ So, we will make a HelloWorld class that will return 'Hello World!' if we access
 
 3. Access the '/hello_world' URL and you should get the response from your Rack Helloworld application, without even executing another middleware in the stack. So if you want to perform a simple action and respond to the user, you could create your own Rack middleware, use it and spare some milliseconds. Cool, isn't it?
 
-### Resources
+## Resources
 
 You can find additional resources in the Phenix-Extras repository, like custom views (to render using Twig, Smarty or another template engine).
 
