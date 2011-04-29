@@ -1,0 +1,23 @@
+<?php
+// Will route the root URL to the index action of HomeController
+Phenix::get('/', 'home#index');
+
+
+// A route that you can use for most projects.
+// If the url contains at least on 'parameter' (ie. '/home') the router will execute HomeControler->index().
+// If it contains two 'parameters' (ie. '/products/list'), it will route to ProductsController->list().
+// And if it contains three 'parameters' (ie. 'products/edit/10') and the last one (in this case) is 
+// numeric and has from 1 to 8 digits it will route to:
+// ProductsController->edit(array('controller' => 'products', 'action' => 'edit', 'id' => 10))
+Phenix::get('/:controller(/:action(/:id))')->conditions(array('id' => '\d{1,8}'));
+
+
+// GET: /posts/20/edit -> PostsController->edit(array('id' => 20))
+Phenix::get('/posts/:id/edit', 'posts#edit')->conditions(array('id' => '\d{1,8}'));
+
+
+// GET: /posts            -> PostsController->index()
+//      /posts/2011       -> PostsController->index(array('year' => 2011))
+//      /posts/2011/04    -> PostsController->index(array('year' => 2011, 'month' => 04))
+//      /posts/2011/04/29 -> PostsController->index(array('year' => 2011, 'month' => 04, 'day' => 29))
+Phenix::get('/posts(/:year(/:month(/:day)))', 'posts#index');
