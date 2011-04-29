@@ -42,11 +42,6 @@ class Controller
 	public $viewPath = null;
 
 	/**
-	 * File extension of view templates
-	 */
-	public $ext = '.phtml';
-
-	/**
 	 * Output of the requested action
 	 */
 	public $output = null;

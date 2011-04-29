@@ -62,7 +62,6 @@ class View
 			$this->variables = $controller->variables;
 			$this->renderLayout = $controller->renderLayout;
 			$this->viewPath = $controller->viewPath;
-			$this->ext = $controller->ext;
 		}
 	}
 
