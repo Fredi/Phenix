@@ -83,6 +83,15 @@ class Controller
 
 		return $this->output;
 	}
+
+	public function redirect($url, $message = null, $type = 'notice')
+	{
+		if (!is_null($message))
+			flash($type, $message);
+
+		Phenix::redirect($url);
+	}
+
 	public function beforeFilter() {}
 
 	public function afterFilter() {}
