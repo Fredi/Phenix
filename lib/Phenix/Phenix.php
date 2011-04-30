@@ -1,6 +1,8 @@
 <?php
 error_reporting(E_ALL | E_STRICT);
 
+set_error_handler(array('Phenix', 'handleErrors'));
+
 spl_autoload_register(array('Phenix', 'autoload'));
 
 define("PHENIX_PATH", ROOT.DS."lib".DS."Phenix");
@@ -104,7 +106,16 @@ class Phenix
 				ORM::configure($key, $val);
 		}
 
-		$this->flash = new Session_Flash($config['flash_key']);
+		if (Phenix::config('log_enable') === true )
+		{
+			$logger = Phenix::config('log_logger');
+			if (empty($logger))
+				Log::setLogger(new Log_File(Phenix::config('log_path'), Phenix::config('log_level')));
+			else
+				Log::setLogger($logger);
+		}
+
+		$this->flash = new Session_Flash(Phenix::config('flash_key'));
 
 		if (!is_dir(LOG))
 			mkdir(LOG);
@@ -117,6 +128,17 @@ class Phenix
 		$this->setup();
 
 		$this->request->handleRequest();
+	}
+
+	public static function handleErrors($errno, $errstr = '', $errfile = '', $errline = '')
+	{
+		if (!(error_reporting() & $errno))
+			return;
+
+		Log::error(sprintf("Message: %s | File: %s | Line: %d | Level: %d", $errstr, $errfile, $errline, $errno));
+
+		// If we are debugging then let php execute its internal error handler
+		return (Phenix::config('debug') !== true);
 	}
 
 	public static function config($name, $value = null)

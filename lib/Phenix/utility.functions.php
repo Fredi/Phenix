@@ -128,7 +128,7 @@ function loadConfig()
 		// Database
 		'database' => array(),
 		// Log
-		'log_enabled' => false,
+		'log_enable' => false,
 		'log_class' => null,
 		'log_path' => 'log',
 		'log_level' => 4,
