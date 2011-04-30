@@ -49,7 +49,7 @@ class ExceptionHandler
 	{
 		try
 		{
-			//$this->log_error($exception);
+			Log::error($exception);
 
 			$request = new Request($env);
 			if ($this->consider_all_requests_local || $request->isLocal())
