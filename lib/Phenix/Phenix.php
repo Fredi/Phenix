@@ -88,6 +88,8 @@ class Phenix
 		$this->router = new Router();
 		$this->session = new Session();
 
+		$this->checkSystemFolders();
+
 		$config = loadConfig();
 		$this->settings = $config;
 
@@ -115,11 +117,17 @@ class Phenix
 		}
 
 		$this->flash = new Session_Flash(Phenix::config('flash_key'));
+	}
 
-		if (!is_dir(LOG))
-			mkdir(LOG);
-		if (!is_dir(TMP))
-			mkdir(TMP);
+	/**
+	 * Create system folders if they doesn't exist
+	 */
+	private function checkSystemFolders()
+	{
+		$systemFolders = array(APP_PATH, CONTROLLERS_PATH, MODELS_PATH, VIEWS_PATH, HELPERS_PATH, LOG, TMP);
+		foreach ($systemFolders as $dir)
+			if (!is_dir($dir))
+				mkdir($dir);
 	}
 
 	public function run()
