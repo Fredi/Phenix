@@ -4,6 +4,25 @@
  */
 
 /**
+ * Try to auto load classes in the registered directories
+ */
+require_once ROOT.DS."lib".DS."Phenix".DS."AutoLoader.php";
+
+$autoloader = new AutoLoader();
+$autoloader->registerDirectories(array(
+	ROOT.DS."lib"
+));
+$autoloader->register();
+
+function autoloader()
+{
+	global $autoloader;
+	if ($autoloader instanceof AutoLoader)
+		return $autoloader;
+	throw new RuntimeException('The $autoloader variable is not an instance of the AutoLoader class');
+}
+
+/**
  * Returns the instance of the Phenix Framework class
  */
 function phenix()
