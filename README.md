@@ -11,13 +11,13 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 * Built on a library similar to [Rack](http://rack.rubyforge.org/) for easy middleware-based expandability
 * Database support with [Idiorm](https://github.com/j4mie/idiorm) and [Paris](https://github.com/j4mie/paris) for Active Record
 * Template system that allows custom views (ie. [Twig](http://www.twig-project.org/), [Smarty](http://www.smarty.net/), ...)
-* Error handling (show details only locally)
 * Flash messaging
+* Error handling (show details only locally)
+* Logging system
 * Supports PHP 5.1.2+
 
 ### Coming soon
 
-* Logging system
 * Caching system
 * Unit testing w/ [PHPUnit](https://github.com/sebastianbergmann/phpunit/)
 * Command line system to generate controllers/views and models
