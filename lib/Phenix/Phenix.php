@@ -91,16 +91,15 @@ class Phenix
 		$config = loadConfig();
 		$this->settings = $config;
 
-		if (isset($config['database']['driver']))
+		$database = Phenix::config('database');
+		if (isset($database['dsn']))
 		{
-			$database = $config['database'];
-
 			require_once(ROOT.DS."vendor".DS."idiorm".DS."idiorm.php");
 			require_once(ROOT.DS."vendor".DS."paris".DS."paris.php");
 
-			ORM::configure($database['driver']);
+			ORM::configure($database['dsn']);
 
-			unset($database['driver']);
+			unset($database['dsn']);
 
 			foreach ($database as $key => $val)
 				ORM::configure($key, $val);
