@@ -2,9 +2,25 @@
 // Configuration
 
 $config = array(
+	// Mysql database connection
 	'database' => array(
 		'dsn' => 'mysql:host=localhost;dbname=my_database',
 		'username' => 'root',
 		'password' => ''
-	)
+	),
+	/*
+	// SQLite database connection
+	'database' => array(
+		'dsn' => 'sqlite:../db/example.db'
+	),
+	*/
+	// Debug
+	'debug' => true,
+	// Logging
+	'log_enable' => true,
+	'log_class' => null,
+	'log_path' => '../log',
+	'log_level' => 4,
+	// Flash messages session key
+	'flash_key' => 'flash'
 );
