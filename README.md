@@ -10,7 +10,7 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 * RESTful HTTP routes (GET, POST, PUT, DELETE)
 * Built on a library similar to [Rack](http://rack.rubyforge.org/) for easy middleware-based expandability
 * Database support with [Idiorm](https://github.com/j4mie/idiorm) and [Paris](https://github.com/j4mie/paris) for Active Record
-* Template system that allows custom views (ie. [Twig](http://www.twig-project.org/), [Smarty](http://www.smarty.net/), ...)
+* Template system that allows custom views (ie. [Twig](http://www.twig-project.org/), [Smarty](http://www.smarty.net/), ... Check the [Phenix-Extra](https://github.com/fredi/Phenix-Extras) repository for already made custom views)
 * Flash messaging
 * Error handling (show details only locally)
 * Logging system
