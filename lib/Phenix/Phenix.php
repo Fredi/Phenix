@@ -38,6 +38,8 @@ class Phenix
 
 	private $variables = array();
 
+	private $settings = array();
+
 	public static function getInstance()
 	{
 		if (!isset(self::$instance))
@@ -85,7 +87,7 @@ class Phenix
 		$this->session = new Session();
 
 		$config = loadConfig();
-		set('config', $config);
+		$this->settings = $config;
 
 		if (isset($config['database']['driver']))
 		{
@@ -115,6 +117,18 @@ class Phenix
 		$this->setup();
 
 		$this->request->handleRequest();
+	}
+
+	public static function config($name, $value = null)
+	{
+		if (func_num_args() === 1)
+		{
+			if (is_array($name))
+				self::$instance->settings = array_merge(self::$instance->settings, $name);
+			else
+				return in_array($name, array_keys(self::$instance->settings)) ? self::$instance->settings[$name] : null;
+		} else
+			self::$instance->settings[$name] = $value;
 	}
 
 	public function __get($name)
