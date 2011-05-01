@@ -63,8 +63,8 @@ class Phenix
 		else if (file_exists(MODELS_PATH.DS.strtolower($class).'.php'))
 			require_once(MODELS_PATH.DS.strtolower($class).'.php');
 		// Try to load a helper
-		else if (file_exists(HELPERS_PATH.DS.strtolower($class).'.php'))
-			require_once(HELPERS_PATH.DS.strtolower($class).'.php');
+		else if (file_exists(HELPERS_PATH.DS.underscore($class).'.php'))
+			require_once(HELPERS_PATH.DS.underscore($class).'.php');
 	}
 
 	function call(&$env)
