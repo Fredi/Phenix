@@ -33,7 +33,7 @@ generate($type, $argv);
 function generate($type, $args = array())
 {
 	if (!in_array($type, array("controller", "model")))
-		die("{$tipo} is not a generator");
+		die("{$type} is not a generator");
 
 	$name = array_shift($args);
 	$function = "phenix_generate_{$type}";
