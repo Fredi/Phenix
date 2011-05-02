@@ -5,7 +5,7 @@ class BaseModel extends Model
 
 	public function table_name()
 	{
-		return self::_get_table_name();
+		return self::_get_table_name(get_class($this));
 	}
 
 	public function errors()
