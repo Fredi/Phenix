@@ -1,0 +1,22 @@
+#!/bin/sh
+
+BASE_PATH=""
+if [ $0 == "script/generate" ]
+then
+	BASE_PATH="script"
+fi
+
+if [ -f "$BASE_PATH/config" ]
+then
+	. $BASE_PATH/config
+else
+	echo "PHP_CLI=" > $BASE_PATH/config
+fi
+
+if [ "$PHP_CLI" == "" ]
+then
+	echo "Configure the PHP_CLI variable in the 'config' file with the path to your php bin"
+	echo "Example: /c/php/php.exe"
+else
+	exec $PHP_CLI $BASE_PATH/phenix.php "$@"
+fi
