@@ -77,7 +77,7 @@ function phenix_generate_controller($name, $actions = array())
 	$controller_dir = "app/controllers";
 
 	$controller_content = "<?php\n";
-	$controller_content .= "class {$controller_class_name} extends Controller\n";
+	$controller_content .= "class {$controller_class_name} extends ApplicationController\n";
 	$controller_content .= "{\n";
 	foreach ($actions as $action)
 	{
