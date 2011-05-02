@@ -96,6 +96,8 @@ class Controller
 
 	public function afterFilter() {}
 
+	public function beforeRender() {}
+
 	public function set($name, $value)
 	{
 		$this->variables[$name] = $value;

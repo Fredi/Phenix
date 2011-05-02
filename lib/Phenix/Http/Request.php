@@ -59,7 +59,10 @@ class Http_Request extends Request
 			throw new ActionNotFoundException($action);
 
 		if ($output === null || empty($output))
+		{
+			$controller->beforeRender();
 			$output = $controller->render();
+		}
 
 		$controller->afterFilter();
 
