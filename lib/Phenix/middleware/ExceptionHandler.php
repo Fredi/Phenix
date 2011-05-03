@@ -99,6 +99,7 @@ class ExceptionHandler
 
 	private function render($status, $body)
 	{
+		Phenix::response()->status($status);
 		return array($status, array('Content-Type' => 'text/html', 'Content-Length' => strlen($body)), array($body));
 	}
 
