@@ -122,7 +122,7 @@ function humanize($lower_case_and_underscored_word)
 /**
  * Load config and routes
  */
-function loadConfig()
+function loadConfig($custom_config_file = null, $custom_routes_file = null)
 {
 	$default_config = array(
 		// Database
@@ -138,7 +138,7 @@ function loadConfig()
 		'flash_key' => 'flash'
 	);
 
-	$config_file = ROOT.DS."config".DS."config.php";
+	$config_file = (!is_null($custom_config_file)) ? $custom_config_file : ROOT.DS."config".DS."config.php";
 
 	$loaded_config = $default_config;
 
@@ -150,7 +150,7 @@ function loadConfig()
 			$loaded_config = array_merge($default_config, $config);
 	}
 
-	$routes_file = ROOT.DS."config".DS."routes.php";
+	$routes_file = (!is_null($custom_routes_file)) ? $custom_routes_file : ROOT.DS."config".DS."routes.php";
 
 	if (file_exists($routes_file))
 		include($routes_file);

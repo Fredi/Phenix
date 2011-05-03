@@ -90,7 +90,7 @@ class Phenix
 
 		$this->checkSystemFolders();
 
-		$config = loadConfig();
+		$config = loadConfig(Phenix::config('config_file'), Phenix::config('routes_file'));
 		$this->settings = $config;
 
 		$database = Phenix::config('database');
