@@ -26,9 +26,6 @@ class Http_Request extends Request
 
 		$class_name = camelize($route->controller().'_controller');
 
-		if (!file_exists(CONTROLLERS_PATH.DS.underscore($class_name).'.php'))
-			throw new ControllerNotFoundException($class_name);
-
 		if (class_exists($class_name))
 			$controller = new $class_name();
 		else
