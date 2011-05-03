@@ -5,12 +5,7 @@ class Router
 
 	public function __construct()
 	{
-		$this->routes = array(
-			'GET' => array(),
-			'POST' => array(),
-			'PUT' => array(),
-			'DELETE' => array()
-		);
+		$this->cleanRoutes();
 	}
 
 	public function getMatched()
@@ -33,6 +28,16 @@ class Router
         $this->routes[$method][] = $route;
         return $route;
     }
+
+	public function cleanRoutes()
+	{
+		$this->routes = array(
+			'GET' => array(),
+			'POST' => array(),
+			'PUT' => array(),
+			'DELETE' => array()
+		);
+	}
 }
 
 class RouteNotMatchedException extends Exception {}
