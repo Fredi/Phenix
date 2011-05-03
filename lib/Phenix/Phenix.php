@@ -50,6 +50,13 @@ class Phenix
 		return self::$instance;
 	}
 
+	public function __construct()
+	{
+		$this->response = new Http_Response();
+		$this->router = new Router();
+		$this->session = new Session();
+	}
+
 	public static function autoload($class)
 	{
 		// Try to load Phenix libraries
@@ -81,12 +88,8 @@ class Phenix
 
 	public function setup()
 	{
-		if (!isset($_SESSION))
+		if (session_id() == '')
 			session_start();
-
-		$this->response = new Http_Response();
-		$this->router = new Router();
-		$this->session = new Session();
 
 		$this->checkSystemFolders();
 
