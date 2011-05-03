@@ -6,6 +6,11 @@ class Http_Response extends Response
 		$this->status = $status;
 	}
 
+	public function getStatus()
+	{
+		return $this->status;
+	}
+
 	public function headers()
 	{
 		return $this->headers;
