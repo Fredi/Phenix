@@ -108,6 +108,16 @@ class View
 		return $this->output;
 	}
 
+	private function render_partial($name, $vars = array())
+	{
+		$partialFile = $this->partialFileName($name);
+
+		$vars = array_merge($this->variables, $vars);
+		extract($vars);
+
+		require $partialFile;
+	}
+
 	public function _render($__viewFile, $__viewVars)
 	{
 		extract($__viewVars, EXTR_SKIP);
@@ -142,6 +152,30 @@ class View
 		$name = str_replace("/", DS, $name);
 
 		$file = VIEWS_PATH.DS."layouts".DS.$name.$this->ext;
+
+		if (!file_exists($file))
+			throw new TemplateNotFoundException($file);
+
+		return $file;
+	}
+
+	public function partialFileName($name = null)
+	{
+		if (is_null($name))
+			throw new InvalidArgumentException("You must specify the partial name");
+
+		if (strpos($name, "/") === false)
+			$name = $this->viewPath.DS."_".$name;
+		else
+		{
+			$a = explode("/", $name);
+			$a[count($a) - 1] = "_".end($a);
+			$name = implode("/", $a);
+		}
+
+		$name = str_replace("/", DS, $name);
+
+		$file = VIEWS_PATH.DS.$name.$this->ext;
 
 		if (!file_exists($file))
 			throw new TemplateNotFoundException($file);
