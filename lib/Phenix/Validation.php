@@ -29,10 +29,10 @@ class Validation
 	 * Validates fields with values
 	 *
 	 * Example to use in your model:
-	 * $__validations = array("name" => array("presence" => array()));
+	 * protected $__validations = array("name" => array("presence" => array()));
 	 *
 	 * If you want a custom message:
-	 * $__validations = array("name" => array("presence" => array("message" => "You must enter your name")));
+	 * protected $__validations = array("name" => array("presence" => array("message" => "You must enter your name")));
 	 */
 	public function validates_presence_of($value, $fieldName, $options = array())
 	{
@@ -47,7 +47,7 @@ class Validation
 	 * Validates the if the user set an unnaceptable value
 	 *
 	 * Example to use in your model:
-	 * $__validations = array("username" => array("exclusion" => array("in" => array("admin", "superuser"), "message" => "Username not allowed")));
+	 * protected $__validations = array("username" => array("exclusion" => array("in" => array("admin", "superuser"), "message" => "Username not allowed")));
 	 */
 	public function validates_exclusion_of($value, $fieldName, $options = array())
 	{
@@ -68,7 +68,7 @@ class Validation
 	 * Validates using a regular expression
 	 *
 	 * Example to use in your model:
-	 * $__validations = array("email" => array("format" => array("with" => "/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i")));
+	 * protected $__validations = array("email" => array("format" => array("with" => "/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i")));
 	 */
 	public function validates_format_of($value, $fieldName, $options = array())
 	{
@@ -89,7 +89,7 @@ class Validation
 	 * Validates if the value is one of the values you want
 	 *
 	 * Example to use in your model:
-	 * $__validations = array("gender" => array("inclusion", array("in" => array("m", "f"))));
+	 * protected $__validations = array("gender" => array("inclusion", array("in" => array("m", "f"))));
 	 */
 	public function validates_inclusion_of($value, $fieldName, $options = array())
 	{
@@ -110,10 +110,10 @@ class Validation
 	 * Validates the length of a value
 	 *
 	 * Examples to use in your model:
-	 * $__validations = array("name" => array("length" => array("min" => 3, "message" => "Does your name has less then 3 letters?")));
-	 * $__validations = array("name" => array("length" => array("max" => 50, "message" => "Less than 50 characters")));
-	 * $__validations = array("username" => array("length" => array("in" => array(6, 20), "message" => "Username must have at minimum 6 characters and maximum 20")));
-	 * $__validations = array("year" => array("length" => array("is" => 4, "message" => "Year with 4 digits")));
+	 * protected $__validations = array("name" => array("length" => array("min" => 3, "message" => "Does your name has less then 3 letters?")));
+	 * protected $__validations = array("name" => array("length" => array("max" => 50, "message" => "Less than 50 characters")));
+	 * protected $__validations = array("username" => array("length" => array("in" => array(6, 20), "message" => "Username must have at minimum 6 characters and maximum 20")));
+	 * protected $__validations = array("year" => array("length" => array("is" => 4, "message" => "Year with 4 digits")));
 	 */
 	public function validates_length_of($value, $fieldName, $options = array())
 	{
@@ -142,7 +142,7 @@ class Validation
 	 * Validates if the value is numeric
 	 *
 	 * Example to use in your model:
-	 * $__validations = array("price" => array("numericality" => array()));
+	 * protected $__validations = array("price" => array("numericality" => array()));
 	 */
 	public function validates_numericality_of($value, $fieldName, $options = array())
 	{
@@ -168,7 +168,7 @@ class Validation
 	 * Validates if the value already exists in your table
 	 *
 	 * Example to use in your model:
-	 * $__validations = array("email" => array("uniqueness" => array()));
+	 * protected $__validations = array("email" => array("uniqueness" => array()));
 	 */
 	public function validates_uniqueness_of($value, $fieldName, $options = array())
 	{
@@ -186,7 +186,7 @@ class Validation
 	 * Validates the value using an existing function that return true if valid or false if invalid
 	 *
 	 * Example to use in your model:
-	 * $__validations = array("text" => array("with_function", array("some_function", "message" => "Something went wrong")));
+	 * protected $__validations = array("text" => array("with_function", array("some_function", "message" => "Something went wrong")));
 	 */
 	public function validates_with_function_of($value, $fieldName, $options = array())
 	{
