@@ -22,6 +22,8 @@ class BaseModel extends Model
 
 	public function beforeFilter() {}
 	public function beforeValidation() {}
+	public function beforeCreate() {}
+	public function beforeUpdate() {}
 	public function beforeSave() {}
 
 	public function save($data = array())
@@ -47,7 +49,13 @@ class BaseModel extends Model
 
 		if ($this->validate())
 		{
+			if (is_null($this->id))
+				$this->beforeCreate();
+			else
+				$this->beforeUpdate();
+
 			$this->beforeSave();
+
 			return parent::save();
 		}
 
