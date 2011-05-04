@@ -69,13 +69,8 @@ class BaseModel extends Model
 					break;
 
 				$function = "validates_{$type}_of";
-				if ($type == "confirmation")
-				{
-					$confirmation = $field."_confirmation";
-					$validation->$function($this->$field, $this->$confirmation, $field, $options);
-				}
-				else
-					$validation->$function($this->$field, $field, $options);
+
+				$validation->$function($this->$field, $field, $options);
 			}
 		}
 
