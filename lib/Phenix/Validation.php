@@ -144,7 +144,7 @@ class Validation
 	 * Example to use in your model:
 	 * $__validations = array("price" => array("numericality" => array()));
 	 */
-	public function validates_numericality_of($fieldName, $options = array())
+	public function validates_numericality_of($value, $fieldName, $options = array())
 	{
 		if (@$options['allow_null'] && ($value == null))
 			return true;
