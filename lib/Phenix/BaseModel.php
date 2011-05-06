@@ -8,7 +8,19 @@ class BaseModel extends Model
 	public static function create($data = null)
 	{
 		$class = get_called_class();
-		return parent::factory($class)->create($data);
+		return BaseModel::factory($class)->create($data);
+	}
+
+	public static function find_one($id = null)
+	{
+		$class = get_called_class();
+		return BaseModel::factory($class)->find_one($id);
+	}
+
+	public static function all()
+	{
+		$class = get_called_class();
+		return BaseModel::factory($class)->find_many();
 	}
 
 	public function table_name()
