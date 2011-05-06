@@ -5,6 +5,12 @@ class BaseModel extends Model
 	protected $__validations = array();
 	protected $__fields_with_errors = array();
 
+	public static function create($data = null)
+	{
+		$class = get_called_class();
+		return parent::factory($class)->create($data);
+	}
+
 	public function table_name()
 	{
 		return self::_get_table_name(get_class($this));
@@ -85,5 +91,18 @@ class BaseModel extends Model
 		$this->__fields_with_errors = $validation->fields_with_errors();
 
 		return !$validation->errors();
+	}
+}
+
+if (!function_exists('get_called_class'))
+{
+	function get_called_class()
+	{
+		$bt = debug_backtrace();
+		$lines = file($bt[1]['file']);
+		preg_match('/([a-zA-Z0-9\_]+)::'.$bt[1]['function'].'/',
+			$lines[$bt[1]['line']-1],
+			$matches);
+		return $matches[1];
 	}
 }
