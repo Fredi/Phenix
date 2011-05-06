@@ -70,7 +70,7 @@ function phenix_generate($dest_dir, $dest_file, $content)
 
 function phenix_generate_controller($name, $actions = array())
 {
-	$controller_name = $name;
+	$controller_name = strtolower($name);
 	$controller_class_name = camelize($controller_name . "_controller");
 	$helper_class_name = camelize($controller_name ."_helper");
 
@@ -118,7 +118,7 @@ function phenix_generate_view($controller, $action)
 
 function phenix_generate_model($name, $options = array())
 {
-	$model_name = $name;
+	$model_name = strtolower($name);
 	$model_class_name = camelize($model_name);
 
 	$models_dir = "app/models";
