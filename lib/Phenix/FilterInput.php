@@ -15,6 +15,11 @@ class FilterInput
 		// Handle the type constraint
 		switch (strtoupper($type))
 		{
+			case 'RAW' :
+				// No filter
+				$result = $source;
+				break;
+
 			case 'INT' :
 			case 'INTEGER' :
 				// Only use the first integer value
