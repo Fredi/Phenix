@@ -5,10 +5,14 @@ class BaseModel extends Model
 	protected $__validations = array();
 	protected $__fields_with_errors = array();
 
+	protected $__attr_accessible = array();
+
 	public static function create($data = null)
 	{
 		$class = get_called_class();
-		return BaseModel::factory($class)->create($data);
+		$model = BaseModel::factory($class)->create();
+
+		return $model->set_data($data);
 	}
 
 	public static function find_one($id = null)
@@ -46,11 +50,7 @@ class BaseModel extends Model
 
 	public function save($data = array())
 	{
-		if (!empty($data))
-		{
-			foreach ($data as $field => $value)
-				$this->$field = $value;
-		}
+		$this->set_data($data);
 
 		$this->beforeFilter();
 
@@ -103,6 +103,21 @@ class BaseModel extends Model
 		$this->__fields_with_errors = $validation->fields_with_errors();
 
 		return !$validation->errors();
+	}
+
+	public function set_data($data = array())
+	{
+		if (!empty($data))
+		{
+			foreach ($data as $field => $value)
+			{
+				if ((!empty($this->__attr_accessible) && isset($this->__attr_accessible[$field])) 
+					|| empty($this->__attr_accessible))
+					$this->$field = $value;
+			}
+		}
+
+		return $this;
 	}
 }
 
