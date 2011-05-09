@@ -245,6 +245,34 @@ class Phenix
 		return self::mapRoute("DELETE", $args);
 	}
 
+	public static function resources($controller, $path)
+	{
+		$controller = strtolower($controller);
+		$path = isset($path) ? $path : "/".$controller;
+
+		$contitions = array('id' => '\d{1,8}');
+		self::mapRoute("GET", array($path, $controller."#index"));
+		self::mapRoute("GET", array($path."/new", $controller."#add"));
+		self::mapRoute("POST", array($path, $controller."#create"));
+		self::mapRoute("GET", array($path."/:id", $controller."#show"))->conditions($contitions);
+		self::mapRoute("GET", array($path."/:id/edit", $controller."#edit"))->conditions($contitions);
+		self::mapRoute("PUT", array($path."/:id", $controller."#update"))->conditions($contitions);
+		self::mapRoute("DELETE", array($path."/:id", $controller."#destroy"))->conditions($contitions);
+	}
+
+	public static function resource($controller, $path)
+	{
+		$controller = strtolower($controller);
+		$path = isset($path) ? $path : "/".$controller;
+
+		self::mapRoute("GET", array($path."/new", $controller."#add"));
+		self::mapRoute("POST", array($path, $controller."#create"));
+		self::mapRoute("GET", array($path, $controller."#show"));
+		self::mapRoute("GET", array($path."/edit", $controller."#edit"));
+		self::mapRoute("PUT", array($path, $controller."#update"));
+		self::mapRoute("DELETE", array($path, $controller."#destroy"));
+	}
+
 	public static function flash($type, $message)
 	{
 		self::$instance->flash->set($type, $message);
