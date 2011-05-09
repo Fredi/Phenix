@@ -111,9 +111,12 @@ class BaseModel extends Model
 		{
 			foreach ($data as $field => $value)
 			{
-				if ((!empty($this->__attr_accessible) && isset($this->__attr_accessible[$field])) 
-					|| empty($this->__attr_accessible))
+				if (empty($this->__attr_accessible))
 					$this->$field = $value;
+				else if (in_array($field, $this->__attr_accessible))
+					$this->$field = $value;
+				else
+					unset($this->__validations[$field]);
 			}
 		}
 
