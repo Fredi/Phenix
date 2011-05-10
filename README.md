@@ -44,7 +44,7 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
 4. Restart your server if needed and go to the url you just created and you'll see:
 
-        "The page you were looking for doesn't exist."
+        "Routing Error"
 
   It's just because there is no routes configured.
 
