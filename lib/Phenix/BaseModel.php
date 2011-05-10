@@ -77,7 +77,7 @@ class BaseModel extends Model
 			return parent::save();
 		}
 
-		return $this;
+		return false;
 	}
 
 	public function validate()
