@@ -14,12 +14,12 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 * Flash messaging
 * Error handling (show details only locally)
 * Logging system
+* Caching system (Filesystem, APC, MemCache)
 * Simple command line script to generate controllers and models
-* Supports PHP 5.1.2+
+* Supports PHP 5.2+
 
 ### Coming soon
 
-* Caching system
 * Unit testing w/ [PHPUnit](https://github.com/sebastianbergmann/phpunit/)
 
 ## Getting Started

@@ -13,6 +13,7 @@ define("MODELS_PATH", APP_PATH.DS."models");
 define("VIEWS_PATH", APP_PATH.DS."views");
 define("HELPERS_PATH", APP_PATH.DS."helpers");
 
+define("CACHE", ROOT.DS."cache");
 define("LOG", ROOT.DS."log");
 define("TMP", ROOT.DS."tmp");
 
@@ -127,7 +128,7 @@ class Phenix
 	 */
 	private function checkSystemFolders()
 	{
-		$systemFolders = array(APP_PATH, CONTROLLERS_PATH, MODELS_PATH, VIEWS_PATH, HELPERS_PATH, LOG, TMP);
+		$systemFolders = array(APP_PATH, CONTROLLERS_PATH, MODELS_PATH, VIEWS_PATH, HELPERS_PATH, LOG, TMP, CACHE);
 		foreach ($systemFolders as $dir)
 			if (!is_dir($dir))
 				mkdir($dir);
