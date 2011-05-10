@@ -13,9 +13,9 @@ define("MODELS_PATH", APP_PATH.DS."models");
 define("VIEWS_PATH", APP_PATH.DS."views");
 define("HELPERS_PATH", APP_PATH.DS."helpers");
 
-define("CACHE", ROOT.DS."cache");
 define("LOG", ROOT.DS."log");
 define("TMP", ROOT.DS."tmp");
+define("CACHE", TMP.DS."cache");
 
 define("MIDDLEWARE_PATH", PHENIX_PATH.DS."middleware");
 
