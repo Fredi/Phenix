@@ -7,6 +7,14 @@ class BaseModel extends Model
 
 	protected $__attr_accessible = array();
 
+	// Simplifies model factory
+	public static function me()
+	{
+		$class_name = get_called_class();
+
+		return BaseModel::factory($class_name);
+	}
+
 	public static function create($data = null)
 	{
 		$class = get_called_class();
