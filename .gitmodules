@@ -6,4 +6,4 @@
 	url = git://github.com/j4mie/idiorm.git
 [submodule "vendor/paris"]
 	path = vendor/paris
-	url = git://github.com/j4mie/paris.git
+	url = git://github.com/fredi/paris.git
