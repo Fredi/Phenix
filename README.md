@@ -112,7 +112,7 @@ One nice thing you can do with RESTful Routes is to use Rails like routing to ex
     Phenix::put('/products/:id', 'products#update')->conditions(array('id' => '\d{1,8}')); // update the product
     Phenix::delete('/products/:id', 'products#destroy')->conditions(array('id' => '\d{1,8}')); // delete the product
 
-That's very nice, but it can be tedious to make all those routes if you have various controllers that acts the same way. So you can use the 'Phenix::resources' function to create all those routes automatically:
+That's very nice, but it can be tedious to make all those routes if you have various controllers that act the same way. So you can use the 'Phenix::resources' function to create all those routes automatically:
 
     Phenix::resources('products');
     // Phenix::resources('products', '/admin/products'); // you can pass a path too if you want
