@@ -50,7 +50,7 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
 ### Creating the "Hello World" Application
 
-1. Create a file called 'hello_controller.php' in the 'app/controllers' directory with the following code (note: you really doesn't need to end the file with '?>'):
+1. Create a file called 'hello_controller.php' in the 'app/controllers' directory with the following code (note: you really don't need to end the file with '?>'):
 
         <?php
         class HelloController extends ApplicationController
@@ -73,6 +73,7 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 
         <?php
         Phenix::get('/', 'hello#index'); // Call the index action in the hello controller
+        // Phenix::get('/', 'hello'); // equivalent to the route above
 
     In this case, where you want to call the 'index' action you could also specify just the controller, because 'index' is the default action.
 
@@ -93,28 +94,34 @@ You can pass Regex conditions to the parameters of your routes too, like:
 
 It will accept an id with just digits (max. 8 digits). If we try to access 'http://localhost/user/show/abc' it will not execute that route, because 'abc' isn't numeric.
 
-You can wrap all routes above in one using conditional parameters:
+You can wrap all routes above in one using optional parameters:
 
     Phenix::get('/:controller(/:action(/:id))')->conditions(array('id' => '\d{1,8}'));
 
-  Note that I'm using the ':action' and ':id' parameters inside parathesis.
+  Note that I'm using the ':action' and ':id' parameters inside parathesis to make them optional.
 
 ### RESTful Routes
 
-One nice thing you can do with RESTful Routes is to use just one URL but execute different actions depending on the request method:
+One nice thing you can do with RESTful Routes is to use Rails like routing to execute different actions depending on the request method:
 
-    Phenix::get('/products', 'products#list');
-    Phenix::post('/products', 'products#save');
-    Phenix::put('/products', 'products#update');
-    Phenix::delete('/products', 'products#destroy');
+    Phenix::get('/products', 'products#index'); // listing of products
+    Phenix::get('/products/new', 'products#add'); // form to add a new product
+    Phenix::post('/products', 'products#create'); // save the new product
+    Phenix::get('/products/:id', 'products#show')->conditions(array('id' => '\d{1,8}')); // show the product with a given id
+    Phenix::get('/products/:id/edit', 'products#edit')->conditions(array('id' => '\d{1,8}')); // edit a product with a given id
+    Phenix::put('/products/:id', 'products#update')->conditions(array('id' => '\d{1,8}')); // update the product
+    Phenix::delete('/products/:id', 'products#destroy')->conditions(array('id' => '\d{1,8}')); // delete the product
 
-That's very nice!
+That's very nice, but it can be tedious to make all those routes if you have various controllers that acts the same way. So you can use the 'Phenix::resources' function to create all those routes automatically:
+
+    Phenix::resources('products');
+    // Phenix::resources('products', '/admin/products'); // you can pass a path too if you want
 
 ### Making a "Hello World" Rack Middleware
 
 Maybe you are asking yourself "what the hell is Rack?". It's basically an interface that sits between the HTTP request and our Application. [Check this out](https://github.com/tedkulp/php-rack#readme) for more information.
 
-So, we will make a HelloWorld class that will return 'Hello World!' if we access the '/hello_world' URL.
+So, we will make a HelloWorld middleware that will return 'Hello World!' if we access the '/hello_world' URL.
 
 1. First create a file called 'helloworld.php' in the '/lib' directory with this code:
 
@@ -135,7 +142,7 @@ So, we will make a HelloWorld class that will return 'Hello World!' if we access
             }
         }
 
-2. Edit the 'config.ru' to add the HelloWorld application as the first Rack application in the stack. It should look like this:
+2. Edit the 'config.ru' to add the HelloWorld middleware as the first Rack application in the stack. It should look like this:
 
         <?php
         // Load php-rack library
@@ -154,9 +161,9 @@ So, we will make a HelloWorld class that will return 'Hello World!' if we access
 
 3. Access the '/hello_world' URL and you should get the response from your Rack Helloworld application, without even executing another middleware in the stack. So if you want to perform a simple action and respond to the user, you could create your own Rack middleware, use it and spare some milliseconds. Cool, isn't it?
 
-## Resources
+## Resources and Examples
 
-You can find additional resources in the Phenix-Extras repository, like custom views (to render using Twig, Smarty or another template engine).
+You can find additional resources and application examples in the Phenix-Extras repository, like custom views (to render using Twig, Smarty or another template engine).
 
 <https://github.com/fredi/Phenix-Extras>
 
