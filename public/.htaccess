@@ -1,4 +1,7 @@
 RewriteEngine On
 
+# Some hosts may require you to change the RewriteBase
+RewriteBase /
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [QSA,L]
