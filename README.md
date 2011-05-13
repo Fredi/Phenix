@@ -142,22 +142,9 @@ So, we will make a HelloWorld middleware that will return 'Hello World!' if we a
             }
         }
 
-2. Edit the 'config.ru' to add the HelloWorld middleware as the first Rack application in the stack. It should look like this:
+2. Edit 'config.php' in the config folder (create if it doesn't exist) and use the following code to execute the HelloWorld middleware before the ExceptionHandler middleware (So it will become the first Rack middleware in the stack):
 
-        <?php
-        // Load php-rack library
-        require_once ROOT.DS."vendor".DS."php-rack".DS."lib".DS."Rack.php";
-        
-        // Load the framework
-        require_once ROOT.DS."lib".DS."Phenix".DS."Phenix.php";
-        
-        Rack::add("HelloWorld", ROOT.DS."lib".DS."helloworld.php");
-        Rack::add("ExceptionHandler", MIDDLEWARE_PATH.DS."ExceptionHandler.php");
-        Rack::add("MethodOverride", MIDDLEWARE_PATH.DS."MethodOverride.php");
-        Rack::add("HeadRequest", MIDDLEWARE_PATH.DS."HeadRequest.php");
-        Rack::add("Phenix", null, Phenix::getInstance());
-
-        Rack::run();
+        Rack::insertBefore("ExceptionHandler", "HelloWorld", ROOT.DS."lib".DS."helloworld.php");
 
 3. Access the '/hello_world' URL and you should get the response from your Rack Helloworld application, without even executing another middleware in the stack. So if you want to perform a simple action and respond to the user, you could create your own Rack middleware, use it and spare some milliseconds. Cool, isn't it?
 
