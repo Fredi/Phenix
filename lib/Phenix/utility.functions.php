@@ -122,40 +122,31 @@ function humanize($lower_case_and_underscored_word)
 /**
  * Load config and routes
  */
-function loadConfig($custom_config_file = null, $custom_routes_file = null)
+function loadConfig($config_file = null)
 {
-	$default_config = array(
+	// Default configuration
+	Config::set(array(
+		// Session
+		'session_autostart' => true,
 		// Database
 		'database' => array(),
 		// Log
 		'log_enable' => false,
 		'log_class' => null,
-		'log_path' => 'log',
+		'log_path' => '../log',
 		'log_level' => 4,
 		// Debug
 		'debug' => true,
 		// Flash session key
-		'flash_key' => 'flash'
-	);
+		'flash_key' => 'flash',
+		// Auto load routes (only disabled for testing)
+		'routes_autoload' => true
+	));
 
-	$config_file = (!is_null($custom_config_file)) ? $custom_config_file : ROOT.DS."config".DS."config.php";
-
-	$loaded_config = $default_config;
+	$config_file = (!is_null($config_file)) ? $config_file : ROOT.DS."config".DS."config.php";
 
 	if (file_exists($config_file))
-	{
-		$config = null;
 		include($config_file);
-		if (is_array($config))
-			$loaded_config = array_merge($default_config, $config);
-	}
-
-	$routes_file = (!is_null($custom_routes_file)) ? $custom_routes_file : ROOT.DS."config".DS."routes.php";
-
-	if (file_exists($routes_file))
-		include($routes_file);
-
-	return $loaded_config;
 }
 
 function flash($type, $message)

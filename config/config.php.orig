@@ -1,7 +1,7 @@
 <?php
 // Configuration
 
-$config = array(
+Config::set(array(
 	// Mysql database connection
 	'database' => array(
 		'dsn' => 'mysql:host=localhost;dbname=my_database',
@@ -23,6 +23,6 @@ $config = array(
 	'log_level' => 4,
 	// Flash messages session key
 	'flash_key' => 'flash'
-);
+));
 
 date_default_timezone_set("America/Sao_Paulo");

@@ -41,12 +41,13 @@ class Phenix
 
 	private $variables = array();
 
-	private $settings = array();
-
-	public static function getInstance()
+	public static function getInstance($loadconfig = false)
 	{
 		if (!isset(self::$instance))
 			self::$instance = new self();
+
+		if ($loadconfig)
+			loadConfig();
 
 		return self::$instance;
 	}
@@ -89,18 +90,22 @@ class Phenix
 
 	public function setup()
 	{
-		if (session_id() == '')
+		if (Config::get('session_autostart'))
 			session_start();
 
 		$this->checkSystemFolders();
 
-		$config = loadConfig(Phenix::config('config_file'), Phenix::config('routes_file'));
-		$this->settings = $config;
+		if (Config::get('routes_autoload') === true)
+		{
+			$routes = ROOT.DS."config".DS."routes.php";
+			if (file_exists($routes))
+				include($routes);
+		}
 
 		require_once(ROOT.DS."vendor".DS."idiorm".DS."idiorm.php");
 		require_once(ROOT.DS."vendor".DS."paris".DS."paris.php");
 
-		$database = Phenix::config('database');
+		$database = Config::get('database');
 		if (isset($database['dsn']))
 		{
 			ORM::configure($database['dsn']);
@@ -111,16 +116,16 @@ class Phenix
 				ORM::configure($key, $val);
 		}
 
-		if (Phenix::config('log_enable') === true )
+		if (Config::get('log_enable') === true )
 		{
-			$logger = Phenix::config('log_logger');
+			$logger = Config::get('log_logger');
 			if (empty($logger))
-				Log::setLogger(new Log_File(Phenix::config('log_path'), Phenix::config('log_level')));
+				Log::setLogger(new Log_File(Config::get('log_path'), Config::get('log_level')));
 			else
 				Log::setLogger($logger);
 		}
 
-		$this->flash = new Session_Flash(Phenix::config('flash_key'));
+		$this->flash = new Session_Flash(Config::get('flash_key'));
 	}
 
 	/**
@@ -149,19 +154,7 @@ class Phenix
 		Log::error(sprintf("Message: %s | File: %s | Line: %d | Level: %d", $errstr, $errfile, $errline, $errno));
 
 		// If we are debugging then let php execute its internal error handler
-		return (Phenix::config('debug') !== true);
-	}
-
-	public static function config($name, $value = null)
-	{
-		if (func_num_args() === 1)
-		{
-			if (is_array($name))
-				self::$instance->settings = array_merge(self::$instance->settings, $name);
-			else
-				return in_array($name, array_keys(self::$instance->settings)) ? self::$instance->settings[$name] : null;
-		} else
-			self::$instance->settings[$name] = $value;
+		return (Config::get('debug') !== true);
 	}
 
 	public function __get($name)

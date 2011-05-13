@@ -18,8 +18,7 @@ class PhenixTest extends PHPUnit_Extensions_OutputTestCase
 {
 	private function setupRackAndRun()
 	{
-		Phenix::config('config_file', 'no_existing_file');
-		Phenix::config('routes_file', 'no_existing_file');
+		Config::set('routes_autoload', false);
 		Rack::add("ExceptionHandler", MIDDLEWARE_PATH.DS."ExceptionHandler.php");
 		Rack::add("Phenix", null, Phenix::getInstance());
 		Rack::run();
@@ -35,27 +34,6 @@ class PhenixTest extends PHPUnit_Extensions_OutputTestCase
 	{
 		$phenix = Phenix::getInstance();
 		$this->assertTrue($phenix instanceof Phenix);
-	}
-
-	public function testPhenixConfigSet()
-	{
-		Phenix::config('foo', 'bar');
-		$this->assertEquals(Phenix::config('foo'), 'bar');
-	}
-
-	public function testPhenixConfigDoesntExist()
-	{
-		$this->assertNull(Phenix::config('bar'));
-	}
-
-	public function testPhenixConfigWithArray()
-	{
-		Phenix::config(array(
-			'one' => '1',
-			'two' => '2'
-		));
-		$this->assertEquals(Phenix::config('one'), '1');
-		$this->assertEquals(Phenix::config('two'), '2');
 	}
 
 	public function testPhenixWithNoRoutes()

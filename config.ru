@@ -13,7 +13,7 @@ require_once ROOT.DS."lib".DS."Phenix".DS."Phenix.php";
 Rack::add("ExceptionHandler", MIDDLEWARE_PATH.DS."ExceptionHandler.php");
 Rack::add("MethodOverride", MIDDLEWARE_PATH.DS."MethodOverride.php");
 Rack::add("HeadRequest", MIDDLEWARE_PATH.DS."HeadRequest.php");
-Rack::add("Phenix", null, Phenix::getInstance());
+Rack::add("Phenix", null, Phenix::getInstance(true));
 
 
 Rack::run();
