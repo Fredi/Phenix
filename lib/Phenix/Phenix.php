@@ -246,7 +246,7 @@ class Phenix
 		return self::mapRoute("DELETE", $args);
 	}
 
-	public static function resources($controller, $path)
+	public static function resources($controller, $path = null)
 	{
 		$controller = strtolower($controller);
 		$path = isset($path) ? $path : "/".$controller;
@@ -261,7 +261,7 @@ class Phenix
 		self::mapRoute("DELETE", array($path."/:id", $controller."#destroy"))->conditions($contitions);
 	}
 
-	public static function resource($controller, $path)
+	public static function resource($controller, $path = null)
 	{
 		$controller = strtolower($controller);
 		$path = isset($path) ? $path : "/".$controller;
