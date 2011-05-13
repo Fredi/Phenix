@@ -16,9 +16,36 @@ class HomeController extends ApplicationController
 
 class PhenixTest extends PHPUnit_Extensions_OutputTestCase
 {
+	private function setConfig($config = array())
+	{
+		Config::set(array(
+			// Session
+			'session_autostart' => false,
+			// Database
+			'database' => array(),
+			// Log
+			'log_enable' => false,
+			'log_class' => null,
+			'log_path' => '../log',
+			'log_level' => 4,
+			// Debug
+			'debug' => true,
+			// Flash session key
+			'flash_key' => 'flash',
+			// Auto load routes (only disabled for testing)
+			'routes_autoload' => true
+		));
+
+		if (is_array($config))
+			Config::set($config);
+	}
+
 	private function setupRackAndRun()
 	{
-		Config::set('routes_autoload', false);
+		$this->setConfig(array(
+			'routes_autoload' => false
+		));
+
 		Rack::add("ExceptionHandler", MIDDLEWARE_PATH.DS."ExceptionHandler.php");
 		Rack::add("Phenix", null, Phenix::getInstance());
 		Rack::run();
