@@ -1,9 +1,6 @@
 <?php
 define("RESCUES_TEMPLATE_PATH", MIDDLEWARE_PATH.DS."templates".DS."rescues");
 
-if (!defined("CONSIDER_ALL_REQUESTS_LOCAL"))
-	define("CONSIDER_ALL_REQUESTS_LOCAL", false);
-
 /**
  * This middleware rescues any exception returned by the application and renders
  * nice exception pages if it's being rescued locally.
@@ -53,7 +50,7 @@ class ExceptionHandler
 			Log::error($exception);
 
 			$request = new Request($env);
-			if (CONSIDER_ALL_REQUESTS_LOCAL || $request->isLocal())
+			if (Config::get('consider_all_requests_local') === true || $request->isLocal())
 				return $this->rescue_action_locally($request, $exception);
 			else
 				return $this->rescue_action_in_public($exception);
