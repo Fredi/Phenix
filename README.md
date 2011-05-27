@@ -33,8 +33,8 @@ php-rack was developed by [Jim Myhrberg](https://github.com/jimeh) and is curren
 2. Change directory to Phenix, init and update submodules in the repository (php-rack, idiorm and paris)
 
         cd Phenix
-        git submodules init
-        git submodules update
+        git submodule init
+        git submodule update
 
 3. Create a symbolic link of the public directory to your public_html or www:
 
