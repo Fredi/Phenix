@@ -90,7 +90,7 @@ This routes are using parameters, and Phenix will know what to do if you access,
 
 You can pass Regex conditions to the parameters of your routes too, like:
 
-    Phenix::get('/:controller/:action/:id)->conditions(array('id' => '\d{1,8}'));
+    Phenix::get('/:controller/:action/:id')->conditions(array('id' => '\d{1,8}'));
 
 It will accept an id with just digits (max. 8 digits). If we try to access 'http://localhost/user/show/abc' it will not execute that route, because 'abc' isn't numeric.
 
