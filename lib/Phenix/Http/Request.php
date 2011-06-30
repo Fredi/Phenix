@@ -42,7 +42,7 @@ class Http_Request extends Request
 
 	private function dispatch(&$controller, $action, $params)
 	{
-		$controller->beforeFilter();
+		$controller->beforeAction();
 
 		$output = null;
 
@@ -61,7 +61,7 @@ class Http_Request extends Request
 			$output = $controller->render();
 		}
 
-		$controller->afterFilter();
+		$controller->afterAction();
 
 		$response = response();
 		$response->write($output);

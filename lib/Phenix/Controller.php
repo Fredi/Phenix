@@ -92,9 +92,9 @@ class Controller
 		Phenix::redirect($url);
 	}
 
-	public function beforeFilter() {}
+	public function beforeAction() {}
 
-	public function afterFilter() {}
+	public function afterAction() {}
 
 	public function beforeRender() {}
 
