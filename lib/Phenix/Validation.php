@@ -186,7 +186,7 @@ class Validation
 	 * Validates the value using an existing function that return true if valid or false if invalid
 	 *
 	 * Example to use in your model:
-	 * protected $__validations = array("text" => array("with_function", array("some_function", "message" => "Something went wrong")));
+	 * protected $__validations = array("text" => array("with_function", array("function" => "some_function", "message" => "Something went wrong")));
 	 */
 	public function validates_with_function_of($value, $fieldName, $options = array())
 	{
