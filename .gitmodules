@@ -1,9 +1,9 @@
 [submodule "vendor/php-rack"]
 	path = vendor/php-rack
-	url = git://github.com/fredi/php-rack.git
+	url = git://github.com/Fredi/php-rack.git
 [submodule "vendor/idiorm"]
 	path = vendor/idiorm
 	url = git://github.com/j4mie/idiorm.git
 [submodule "vendor/paris"]
 	path = vendor/paris
-	url = git://github.com/fredi/paris.git
+	url = git://github.com/Fredi/paris.git
