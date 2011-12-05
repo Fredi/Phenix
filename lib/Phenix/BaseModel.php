@@ -50,12 +50,6 @@ class BaseModel extends Model
 		return $this->__fields_with_errors;
 	}
 
-	public function beforeFilter() {}
-	public function beforeValidation() {}
-	public function beforeCreate() {}
-	public function beforeUpdate() {}
-	public function beforeSave() {}
-
 	public function save($data = array())
 	{
 		$this->set_data($data);
@@ -82,7 +76,10 @@ class BaseModel extends Model
 
 			$this->beforeSave();
 
-			return parent::save();
+			$result = parent::save();
+			$this->afterSave($result);
+
+			return $result;
 		}
 
 		return false;
@@ -128,6 +125,16 @@ class BaseModel extends Model
 
 		return $this;
 	}
+
+	/*
+	 * Hooks
+	 */
+	public function beforeFilter() {}
+	public function beforeValidation() {}
+	public function beforeCreate() {}
+	public function beforeUpdate() {}
+	public function beforeSave() {}
+	public function afterSave($saved = false) {}
 }
 
 if (!function_exists('get_called_class'))
