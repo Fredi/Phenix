@@ -65,12 +65,12 @@ class Phenix
 		$lib = PHENIX_PATH.DS.str_replace('_', DS, $class).".php";
 		if (file_exists($lib))
 			require_once($lib);
-		// Try to load a controller
-		else if (file_exists(CONTROLLERS_PATH.DS.underscore($class).'.php'))
-			require_once(CONTROLLERS_PATH.DS.underscore($class).'.php');
 		// Try to load a model
 		else if (file_exists(MODELS_PATH.DS.underscore($class).'.php'))
 			require_once(MODELS_PATH.DS.underscore($class).'.php');
+		// Try to load a controller
+		else if (file_exists(CONTROLLERS_PATH.DS.underscore($class).'.php'))
+			require_once(CONTROLLERS_PATH.DS.underscore($class).'.php');
 		// Try to load a helper
 		else if (file_exists(HELPERS_PATH.DS.underscore($class).'.php'))
 			require_once(HELPERS_PATH.DS.underscore($class).'.php');
